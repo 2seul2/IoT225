@@ -1,12 +1,12 @@
 ﻿#include <stdio.h>
 #include <conio.h>
+	int dan = 1;  // 구구단의 1단 ~ 9단
+	int nDan = 9; // xx 단 : 9
+	int hDan = 3;
 
 int main()
 {
 	int i, j, k;
-	int dan = 1;  // 구구단의 1단 ~ 9단
-	int nDan = 9; // xx 단 : 9
-	int hDan = 3;
 
 	for (; dan < 10; dan += hDan)	// hDan : 가로 방향 열 수
 	{
