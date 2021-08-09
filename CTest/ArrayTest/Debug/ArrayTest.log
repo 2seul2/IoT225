@@ -12,4 +12,6 @@ C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(77,9): warni
 C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(79,9): warning C4477: 'printf' : 서식 문자열 '%x'에 'unsigned int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int (*)[2]'입니다.
 C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(80,9): warning C4477: 'printf' : 서식 문자열 '%x'에 'unsigned int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int (*)[2]'입니다.
 C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(81,9): warning C4477: 'printf' : 서식 문자열 '%x'에 'unsigned int' 형식의 인수가 필요하지만 variadic 인수 1의 형식이 'int (*)[2]'입니다.
+C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(114,45): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(123,7): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
   ArrayTest.vcxproj -> C:\Users\hulklee1\source\Repos\IoT225\CTest\Debug\ArrayTest.exe

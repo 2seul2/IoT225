@@ -83,9 +83,59 @@ int PointerTest()
 	return 0;
 }
 
+// function define 
+//     Prototype  :  int str_len(char *str)
+// 문자열 str을 받아서 해당 문자열의 길이를 되돌려 줌.
+int str_len(char* str)
+{
+	int ret = 0;
+//	while (*(str + ret++)); return ret;
+	while (1)
+	{
+		if (str[ret] != 0) ret++;
+		else break;
+	}
+	return ret;
+}
+
+int solution1()
+{
+	//문1) scanf 함수를 이용하여 문자열을 입력후
+	//    해당 문자열을 한 글자씩 공백(_)을 삽입하여
+	//	  출력하시오.
+	//    > 12345   ==>  1_2_3_4_5
+	//문2) scanf 함수를 이용하여 문자열을 입력후
+	//     getch() 함수를 이용하여 숫자 키를 누르면
+	//	   해당 위치의 문자를 출력하시오
+
+	char buf[100];  //	buffer : 버퍼 : 배열 == 포인터
+	int i, j, k;
+
+	printf("문자열을 입력하세요 : "); scanf("%s", buf);
+	printf("입력문자열 [%s] 의 길이는 %d 입니다 \n", buf, j = str_len(buf));
+	for (i = 0; i < j; i++)
+	{
+		printf("%c_", buf[i]);
+	}
+
+	while (1)
+	{
+		k = getch() - 0x30;   // 0 ~ 9 숫자키 (    ) 입력
+		if (k >= 0 && k <= 9)
+		{
+			printf("%c", buf[k]);
+			continue;
+		}
+		break;
+	}
+
+	return 0;
+}
+
 int main()
 {
 	//score();
 	//Good();
-	PointerTest();
+	//PointerTest();
+	solution1();
 }
