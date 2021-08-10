@@ -3,6 +3,7 @@
 #include <math.h>
 #include <conio.h>
 #include <time.h>
+//#include <string.h>
 
 const int students = 20;
 int score()
@@ -82,12 +83,12 @@ int PointerTest()
 
 	return 0;
 }
-
 // function define 
 //     Prototype  :  int str_len(char *str)
 // 문자열 str을 받아서 해당 문자열의 길이를 되돌려 줌.
-int str_len(char* str)
+int str_len(char* str)  // 배열이 아닌 포인터로 받음  [] == *
 {
+//	return strlen(str);
 	int ret = 0;
 //	while (*(str + ret++)); return ret;
 	while (1)
@@ -97,7 +98,6 @@ int str_len(char* str)
 	}
 	return ret;
 }
-
 int solution1()
 {
 	//문1) scanf 함수를 이용하여 문자열을 입력후
@@ -112,7 +112,9 @@ int solution1()
 	int i, j, k;
 
 	printf("문자열을 입력하세요 : "); scanf("%s", buf);
-	printf("입력문자열 [%s] 의 길이는 %d 입니다 \n", buf, j = str_len(buf));
+
+	j = str_len(buf);
+	printf("입력문자열 [%s] 의 길이는 %d 입니다 \n", buf, j);
 	for (i = 0; i < j; i++)
 	{
 		printf("%c_", buf[i]);
@@ -131,11 +133,113 @@ int solution1()
 
 	return 0;
 }
+// function define 
+//     Prototype  :  void swap(int a, int b)
+// 정수 변수 a와 b의 값을 교환.
+void swap(int *a, int *b)	// a,b를 포인터로 선언하고 전달된 매개변수 값으로 설정 (초기화)
+{							// 포인터 사용방법 : 포인터가 가리키는 주소의 값 : *p
+							//					 주소 자체 : p
+	int c = *a;
+//	printf("	Input  > a(%08x) : %d, b(%08x) : %d\n", a, *a, b, *b);
+	*a = *b;
+	*b = c;
+//	printf("	Result > a(%08x) : %d, b(%08x) : %d\n", a, *a, b, *b);
+}
 
+int SwapTest()
+{
+	int a = 50, b = 60;
+//	printf("Original> a(%08x) : %d,  b(%08x) : %d\n", &a, a, &b, b);
+
+	swap(&a, &b);
+
+//	printf("After swap> a(%08x) : %d,  b(%08x) : %d\n", &a, a, &b, b);
+
+	return 0;
+}
+
+void  sort(int * a, int n)
+{
+	int i, j, k;
+
+	for (i = 0; i < n; i++)
+	{
+		for (j = i; j < n; j++)
+		{
+			if (a[i] < a[j]) swap(a + i, a + j); // =swap(&a[i], &a[j]); 
+		}
+	}
+}
+
+void swapEx(double * a, double* b)	
+{
+	double c = *a;
+	*a = *b;
+	*b = c;
+}
+
+void swapEx1(char * a, char* b)	
+{
+	char c = *a;
+	*a = *b;
+	*b = c;
+}
+
+// 전역변수 : 이하의 함수에서 사용 가능
+int kor[] = { 67, 70, 77, 65, 68, 72, 79, 55, 85, 61 };
+int eng[] = { 70, 75, 80, 60, 65, 55, 80, 95, 67, 84 };
+char nam[] = "ABCDEFGHIJK";
+
+void  sortEx(double * a, int n)
+{
+	int i, j, k;
+
+	for (i = 0; i < n; i++)
+	{
+		for (j = i; j < n; j++)
+		{
+			if (a[i] < a[j])
+			{
+				swapEx(a + i, a + j); // =swap(&a[i], &a[j]); 
+				swap(kor + i, kor + j);
+				swap(eng + i, eng + j);
+				swapEx1(nam + i, nam + j);
+			}
+		}
+	}
+}
+
+void sortTest()
+{
+	const int nArr = 10;
+	double f_kor = 0.3, f_eng = 0.7;
+	double tot[nArr];
+	int i, j, k;
+
+	for (i = 0; i < nArr; i++)
+	{
+		tot[i] = kor[i] * f_kor + eng[i] * f_eng;
+	}
+	printf("Original :\n"); 
+	printf("이름 : "); for (int i = 0; i < nArr; i++) printf("%7c ", nam[i]); printf("\n\n");
+	printf("국어 : "); for (int i = 0; i < nArr; i++) printf("%7d ", kor[i]); printf("\n\n");
+	printf("영어 : "); for (int i = 0; i < nArr; i++) printf("%7d ", eng[i]); printf("\n\n");
+	printf("합계 : "); for (int i = 0; i < nArr; i++) printf("%7.2f ", tot[i]); printf("\n\n");
+
+	sortEx(tot, nArr);
+
+	printf("Sorted :\n"); 
+	printf("이름 : "); for (int i = 0; i < nArr; i++) printf("%7c ", nam[i]); printf("\n\n");
+	printf("국어 : "); for (int i = 0; i < nArr; i++) printf("%7d ", kor[i]); printf("\n\n");
+	printf("영어 : "); for (int i = 0; i < nArr; i++) printf("%7d ", eng[i]); printf("\n\n");
+	printf("합계 : "); for (int i = 0; i < nArr; i++) printf("%7.2f ", tot[i]); printf("\n\n");
+}
 int main()
 {
 	//score();
 	//Good();
 	//PointerTest();
-	solution1();
+	//solution1();
+	//SwapTest();
+	sortTest();
 }
