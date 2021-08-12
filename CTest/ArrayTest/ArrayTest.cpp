@@ -3,7 +3,7 @@
 #include <math.h>
 #include <conio.h>
 #include <time.h>
-//#include <string.h>
+#include <string.h>
 
 const int students = 20;
 int score()
@@ -192,6 +192,18 @@ void swapEx2(const char** a, const char** b)
 	*b = c;
 }
 
+//struct student {
+//	int kor;
+//	int eng;
+//	char name[10];
+//};
+//typedef struct student STU;
+typedef struct {
+	int kor;
+	int eng;
+	char name[10];
+} STU;
+
 void SWAP(void* a, void* b, int op)
 {
 	if (op == 1)	// char
@@ -212,14 +224,20 @@ void SWAP(void* a, void* b, int op)
 		*(double*)a = *(double*)b;
 		*(double*)b = c;
 	}
+	if (op == 18)	// STU
+	{
+		STU c = *(STU*)a;
+		*(STU*)a = *(STU*)b;
+		*(STU*)b = c;
+	}
 }
-
 // 전역변수 : 이하의 함수에서 사용 가능
 const int nArr = 10;
 int kor[] = { 67, 70, 77, 65, 68, 72, 79, 55, 85, 61 };
 int eng[] = { 70, 75, 80, 60, 65, 55, 80, 95, 67, 84 };
 char nam[] = "ABCDEFGHIJK";//문자열 포인터로 변경 : "홍길동" "홍길이" "홍길삼" "홍길사" "홍길오" "길육" 길칠 길팔 길구 
 const char* name[] = { "홍길동", "홍길이", "홍길삼", "홍길사", "홍길오", "맹일", "맹이", "맹삼", "맹사", "맹오" };
+STU student[nArr];
 
 void  sortEx(double * a, int n)
 {
@@ -236,9 +254,10 @@ void  sortEx(double * a, int n)
 				//swap(eng + i, eng + j);
 				//swapEx2(name + i, name + j);
 				SWAP(a + i, a + j, 8);
-				SWAP(kor + i, kor + j, 4);
-				SWAP(eng + i, eng + j, 4);
-				SWAP(name + i, name + j, 4);
+				SWAP(student + i, student + j, 18);
+				//SWAP(kor + i, kor + j, 4);
+				//SWAP(eng + i, eng + j, 4);
+				//SWAP(name + i, name + j, 4);
 			}
 		}
 	}
@@ -266,6 +285,35 @@ void sortTest()
 	printf("이름 : "); for (int i = 0; i < nArr; i++) printf("%7s ", name[i]); printf("\n\n");
 	printf("국어 : "); for (int i = 0; i < nArr; i++) printf("%7d ", kor[i]); printf("\n\n");
 	printf("영어 : "); for (int i = 0; i < nArr; i++) printf("%7d ", eng[i]); printf("\n\n");
+	printf("합계 : "); for (int i = 0; i < nArr; i++) printf("%7.2f ", tot[i]); printf("\n\n");
+}
+
+void sortTestNew()
+{
+	double f_kor = 0.3, f_eng = 0.7;
+	double tot[nArr];
+	int i, j, k;
+
+	for (i = 0; i < nArr; i++)
+	{
+		student[i].kor = kor[i];
+		student[i].eng = eng[i];
+		strcpy(student[i].name, name[i]);
+
+		tot[i] = student[i].kor * f_kor + student[i].eng * f_eng;
+	}
+	printf("Original :\n"); 
+	printf("이름 : "); for (int i = 0; i < nArr; i++) printf("%7s ", student[i].name); printf("\n\n");
+	printf("국어 : "); for (int i = 0; i < nArr; i++) printf("%7d ", student[i].kor); printf("\n\n");
+	printf("영어 : "); for (int i = 0; i < nArr; i++) printf("%7d ", student[i].eng); printf("\n\n");
+	printf("합계 : "); for (int i = 0; i < nArr; i++) printf("%7.2f ", tot[i]); printf("\n\n");
+
+	sortEx(tot, nArr);
+
+	printf("Sorted :\n"); 
+	printf("이름 : "); for (int i = 0; i < nArr; i++) printf("%7s ", student[i].name); printf("\n\n");
+	printf("국어 : "); for (int i = 0; i < nArr; i++) printf("%7d ", student[i].kor); printf("\n\n");
+	printf("영어 : "); for (int i = 0; i < nArr; i++) printf("%7d ", student[i].eng); printf("\n\n");
 	printf("합계 : "); for (int i = 0; i < nArr; i++) printf("%7.2f ", tot[i]); printf("\n\n");
 }
 
@@ -299,6 +347,6 @@ int main()
 	//PointerTest();
 	//solution1();
 	//SwapTest();
-	sortTest();
+	sortTestNew();
 	//VoidTest();
 }

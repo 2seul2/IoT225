@@ -15,8 +15,11 @@ C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(82,9): warni
 C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(114,45): warning C4996: 'scanf': This function or variable may be unsafe. Consider using scanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
 C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(125,7): warning C4996: 'getch': The POSIX name for this item is deprecated. Instead, use the ISO C and C++ conformant name: _getch. See online help for details.
 C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(163,12): warning C4101: 'k' :참조되지 않은 지역 변수입니다.
-C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(226,12): warning C4101: 'k' :참조되지 않은 지역 변수입니다.
-C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(251,12): warning C4101: 'k' :참조되지 않은 지역 변수입니다.
-C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(251,9): warning C4101: 'j' :참조되지 않은 지역 변수입니다.
-C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(289,8): warning C4101: 'vp' :참조되지 않은 지역 변수입니다.
+C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(244,12): warning C4101: 'k' :참조되지 않은 지역 변수입니다.
+C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(270,12): warning C4101: 'k' :참조되지 않은 지역 변수입니다.
+C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(270,9): warning C4101: 'j' :참조되지 않은 지역 변수입니다.
+C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(301,3): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(295,12): warning C4101: 'k' :참조되지 않은 지역 변수입니다.
+C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(295,9): warning C4101: 'j' :참조되지 않은 지역 변수입니다.
+C:\Users\hulklee1\source\Repos\IoT225\CTest\ArrayTest\ArrayTest.cpp(337,8): warning C4101: 'vp' :참조되지 않은 지역 변수입니다.
   ArrayTest.vcxproj -> C:\Users\hulklee1\source\Repos\IoT225\CTest\Debug\ArrayTest.exe
