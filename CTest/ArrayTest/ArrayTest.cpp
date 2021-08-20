@@ -52,17 +52,18 @@ int Good()
 		{
 			printf("%s %s \n ", good, mon);
 		}
-		else if (k < 18)
+		else if (k>12 && k < 18)
 		{
 			printf("%s %s \n ", good, noon);
 		}
-		else if (k < 23)
+		else if (k>18 && k < 23)
 		{
 			printf("%s %s \n ", good, even);
 		}
 		else
 		{
 			printf("Hi!\n ");
+			break;
 		}
 	}
 
@@ -308,7 +309,8 @@ void sortTest()	//  배열을 이용한 성적처리
 void sortTestNew()		// 구조체를 이용한 성적처리
 {
 	double f_kor = 0.3, f_eng = 0.7;
-	double tot[nArr];
+	double tot1[nArr];
+	double *tot = (double *)malloc(sizeof(double)*nArr);
 	int i, j, k;
 
 	for (i = 0; i < nArr; i++)
@@ -340,33 +342,47 @@ void sortTestEx()		// 구조체를 이용한 성적처리 - 파일 입출력
 	//double tot[nArr], avg[nArr];
 	int i, j, k;
 
+	//******************************************************************
+	//*******************************************************************
+	//*******************************************************************
+	int num;	// file에서 read
+	STU *students;  // malloc 으로 메모리 확보
+	//*******************************************************************
+	//*******************************************************************
+	//*******************************************************************
+
 	FILE* fin = fopen("C:\\Users\\hulklee1\\table1.txt","r");
 	FILE* fout = fopen("C:\\Users\\hulklee1\\table1.rpt","w+b");
-	for (i = 0; i < nArr; i++) fscanf(fin, "%s", student[i].name);
-	for (i = 0; i < nArr; i++) fscanf(fin, "%d", &student[i].kor);
-	for (i = 0; i < nArr; i++) fscanf(fin, "%d", &student[i].eng);
-	for (i = 0; i < nArr; i++) 
+	fscanf(fin, "%d", &num);
+	students = (STU *)malloc(sizeof(STU)*num);
+	for (i = 0; i < num; i++) fscanf(fin, "%s", students[i].name);
+	for (i = 0; i < num; i++) fscanf(fin, "%d", &students[i].kor);
+	for (i = 0; i < num; i++) fscanf(fin, "%d", &students[i].eng);
+	for (i = 0; i < num; i++)
 	{
-		student[i].tot = student[i].kor + student[i].eng;
-		student[i].avg = student[i].tot / 2;
+		students[i].tot = students[i].kor + students[i].eng;
+		students[i].avg = students[i].tot / 2;
 	}
 
 	fprintf(fout, "Original :\n"); 
 	fprintf(fout, "%-7s %-7s %-7s %-7s %-7s\n","  이름","  국어","  영어","  총점","  평균");
-	for (int i = 0; i < nArr; i++)
+	for (int i = 0; i < num; i++)
 	{
 		fprintf(fout, "%7s %7d %7d %7.2f %7.2f\n",
-			student[i].name, student[i].kor, student[i].eng, student[i].tot, student[i].avg);
+			students[i].name, students[i].kor, students[i].eng, students[i].tot, students[i].avg);
 	}
 
-	sortSTU(student, nArr);
+	sortSTU(students, num);
 
 	fprintf(fout, "\n\nSorted :\n");
-	for (int i = 0; i < nArr; i++)
+	for (int i = 0; i < num; i++)
 	{
-		fprintf(fout, "%7s %7d %7d %7.2f %7.2f\n",
-			student[i].name, student[i].kor, student[i].eng, student[i].tot, student[i].avg);
+		fprintf(stdout, "%7s %7d %7d %7.2f %7.2f\n",
+			(students+i)->name, (students + i)->kor, (students + i)->eng, (students + i)->tot, (students + i)->avg);
 	}
+	//fcloseall();
+	fclose(fout);
+	fclose(fin);
 }
 
 void VoidPrint(void* p,int i)
@@ -418,13 +434,36 @@ void StreamTest()
 
 int main()
 {
-	//score();
-	//Good();
-	//PointerTest();
-	//solution1();
-	//SwapTest();
-	//sortTestNew();
-	//VoidTest();
-	//StreamTest();
-	sortTestEx();
+	while (1)
+	{
+		int k;
+		printf("\n\n\n ====================\n"
+			"	1.score();\n"
+			"	2.Good();\n"
+			"	3.PointerTest();\n"
+			"	4.solution1();\n"
+			"	5.SwapTest();\n"
+			"	6.sortTestNew();\n"
+			"	7.VoidTest();\n"
+			"	8.StreamTest();\n"
+			"	9.sortTestEx();\n"
+			"	0. Exit\n\n"
+			" ====================\n"
+			"	Select Menu  ");
+		scanf("%d", &k);
+
+		switch (k)
+		{
+		case 1: score();		break;	// 1.
+		case 2: Good();			break;	// 2.
+		case 3: PointerTest();	break;	// 3.
+		case 4: solution1();	break;	// 4.
+		case 5: SwapTest();		break;	// 5.
+		case 6: sortTestNew();	break;	// 6.
+		case 7: VoidTest();		break;	// 7.
+		case 8: StreamTest();	break;	// 8.
+		case 9: sortTestEx();	break;	// 9.
+		default: return 0;
+		}
+	}
 }
