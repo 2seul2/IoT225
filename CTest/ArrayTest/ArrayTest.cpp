@@ -4,6 +4,7 @@
 #include <conio.h>
 #include <time.h>
 #include <string.h>
+#include <iostream>
 
 const int students = 20;
 int score()
@@ -432,8 +433,75 @@ void StreamTest()
 	else printf("입력 파일이 존재하지 않습니다\n");
 }
 
+#define KBD_BUF_SIZE 20
+#define MAX(x,y)  (x>y)?x:y
+#define MIN(x,y)  (x<y)?x:y
+
+int GetInt()
+{
+	char buf[KBD_BUF_SIZE];
+	fgets(buf, KBD_BUF_SIZE, stdin);  // stdin : Keyboard  until [Enter]
+	return(atoi(buf));
+}
+double GetDouble()
+{
+	char buf[KBD_BUF_SIZE];
+	fgets(buf, KBD_BUF_SIZE, stdin);  // stdin : Keyboard  until [Enter]
+	return(atof(buf));
+}
+
+void StringParse()  // 문자열을 입력받아서 int, double, 문자열 입력을 수행 (scanf 미사용)
+{
+	while (1)
+	{
+		int k;
+		char b[5];
+		printf("\n\n\n ====문자열 변환 테스트 + @ ====\n"
+			"	1.정수 (int)\n"
+			"	2.실수 (double);\n"
+			"	3.문자열 (공백포함);\n"
+			"	4.매크로 함수 테스트\n"
+			" ==========================\n"
+			"	Select Menu  ");
+		//scanf("%d ", &k);	// 최종 kbd buffer의 [Enter] 키 처리 필요
+		fgets(b, 5, stdin);
+
+		if (b[0] == 0x31)  //0x31 == 49 == '1'      (k == 1)
+		{
+			char buf[KBD_BUF_SIZE];
+			printf("정수를 입력하세요  : ");	// prompt message
+			//fgets(buf, KBD_BUF_SIZE, stdin);  // stdin : Keyboard  until [Enter]
+			//int n = atoi(buf);
+			printf("변환된 정수값은 %d 입니다\n\n", GetInt());
+		}
+		else if (*b == '2')
+		{
+			char buf[KBD_BUF_SIZE];
+			printf("실수를 입력하세요  : ");	// prompt message
+			//fgets(buf, KBD_BUF_SIZE, stdin);  // stdin : Keyboard
+			//double d = atof(buf);
+			printf("변환된 실수값은 %f 입니다\n\n", GetDouble());
+		}
+		else if (*(b+0) == '4')
+		{
+			int x, y;
+			float x1, y1;
+			printf("두개의 정수를 입력하세요  : ");	// prompt message
+			//scanf("%d %d", &x, &y);   // GetInt
+			x = GetInt(); y = GetInt();
+			printf("두개의 정수 %d와 %d 중 큰 수는 %d 입니다\n\n\n", x,y, MAX(x,y));	// prompt message
+			printf("두개의 실수를 입력하세요  : ");	// prompt message
+			//scanf("%f %f", &x1, &y1);  // GetDouble
+			x1 = GetDouble(); y1 = GetDouble();
+			printf("두개의 실수 %f와 %f 중 작은 수는 %f 입니다\n", x1,y1, MIN(x1,y1));	// prompt message
+		}
+		else if(*b == '0') break;
+	}
+}
+
 int main()
 {
+	std::cout << "Hello C PlusPlus (C++) World!!!!!!!";
 	while (1)
 	{
 		int k;
@@ -447,10 +515,12 @@ int main()
 			"	7.VoidTest();\n"
 			"	8.StreamTest();\n"
 			"	9.sortTestEx();\n"
+			"	10.StringParse();\n"	// 문자열 변환 테스트
 			"	0. Exit\n\n"
 			" ====================\n"
 			"	Select Menu  ");
-		scanf("%d", &k);
+		//scanf("%d", &k);
+		k = GetInt();
 
 		switch (k)
 		{
@@ -463,6 +533,7 @@ int main()
 		case 7: VoidTest();		break;	// 7.
 		case 8: StreamTest();	break;	// 8.
 		case 9: sortTestEx();	break;	// 9.
+		case 10: StringParse();	break;	// 9.
 		default: return 0;
 		}
 	}
