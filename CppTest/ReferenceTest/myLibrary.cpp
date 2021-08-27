@@ -18,6 +18,11 @@ void swapRef(int* a, int* b)    // 포인터를 사용
     *a = *b; *b = c;
 }
 
+void str_cpy(char* dest, char* src) // strcpy 함수와 동일
+{
+    while (*src) *dest++ = *src++;
+}
+
 double Point::distance(Point p) // Point p와의 거리
 {
     int x2 = (x - p.x) * (x - p.x);
