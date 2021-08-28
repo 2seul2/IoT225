@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;
 void swapValue(int a, int b);   // 함수의 원형(prototype) 선언
 void swapRef(int& a, int& b);
 void swapRef(int* a, int* b);  
@@ -20,6 +21,19 @@ public:
     void SetX(int x) { this->x = x; }
     void SetY(int y) { this->y = y; }
     double distance(Point p); // Point p와의 거리
+    Point operator+(Point p)
+    {
+        return Point(this->x + p.x, this->y + p.y);
+    }
+    Point operator+=(Point p)
+    {
+        x += p.x; y += p.y;
+        return *this;
+    }
+    Point operator*(int n)
+    {
+        return Point(this->x * n, this->y * n);
+    }
 };
 
 class Point3D : public Point        // 2D Point class 상속
@@ -112,6 +126,12 @@ public:
         calc();
     }
     Student(int num, int kor, int eng, const char *str=NULL, int age=0) : Person(num,str,age)
+    {
+        this->Kor = kor;
+        this->Eng = eng;
+        calc();
+    }
+    Student(int num, int kor, int eng, std::string str, int age=0) : Person(num,str.c_str(),age)
     {
         this->Kor = kor;
         this->Eng = eng;

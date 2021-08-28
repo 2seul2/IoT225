@@ -30,11 +30,15 @@ int main()
 {
     string fname;
     fname = "c:\\Users\\hulklee1\\Documents\\student.csv";
+    string nm = "춘향이";
+    Student st(0, 80, 76, nm, 15);
+    ShowClass(st);
+    cout << endl << endl << endl << endl;
 
     int num, age, kor, eng;
-    char name[100];
+    char * name = new char[100];
     int count = 0;
-    Student* stu[100];  // 포인터 : 주소만 있음 (4 byte). == int (4 byte)
+    Student * stu[100] ;  // 포인터 : 주소만 있음 (4 byte). == int (4 byte)
 
     FILE* fp = fopen(fname.c_str(), "r");
     fgets(name, 250, fp); // 첫줄 무시  ==> file read pointer를 다음 줄로 이동
@@ -44,6 +48,8 @@ int main()
         stu[count++] = new Student(num, kor, eng, name, age);
         ShowClass(*stu[count-1]);
     }
+
+    cout << "\n\n\n\n";
     //  Class sorting
     for (int i = 0; i < count - 1; i++)
     {
