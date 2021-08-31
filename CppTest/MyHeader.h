@@ -3,7 +3,19 @@ using namespace std;
 void swapValue(int a, int b);   // 함수의 원형(prototype) 선언
 void swapRef(int& a, int& b);
 void swapRef(int* a, int* b);  
-void str_cpy(char* dest, char* src); // strcpy 함수와 동일
+void str_cpy(char* dest, char* src); // strcpy 함수와 동일 
+#define MAX(X,Y) ((X)>(Y))?(X):(Y) 
+#define MIN(X,Y) ((X)<(Y))?(X):(Y) 
+#define ABS(X)   ((X)<0)?((-1)*X):(X)
+
+template <typename A>
+A Add(A n1, A n2)
+{
+    return n1 + n2;
+}
+
+
+
 
 class Point
 {

@@ -14,7 +14,7 @@ void ShowClass(Student &st1)
     std::cout << "st1.Avg : " << st1.avg() << std::endl;
 }
 
-void swap(int* a, int* b)    // 포인터를 사용     Call-by-reference
+void swap(int* a, int* b)    // 포인터를 사용     Call-by-reference  
 {
     int c = *a;
     *a = *b; *b = c;
@@ -28,9 +28,12 @@ void swapRef(int& a, int& b)    // 포인터를 사용하지 않음
 
 int main()
 {
-    string fname;
-    fname = "c:\\Users\\hulklee1\\Documents\\student.csv";
+    string fname;  // string 변수 선언
+    fname = "c:\\Users\\hulklee1\\Documents\\student.csv";      // 스트링 변수에 대한 대입문
     string nm = "춘향이";
+    string strAdded = fname + nm;
+    cout << strAdded << endl << endl;
+
     Student st(0, 80, 76, nm, 15);
     ShowClass(st);
     cout << endl << endl << endl << endl;

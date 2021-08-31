@@ -20,9 +20,20 @@ int main()
 
     Point p1;   // p(0,0)  struct-->typedef--->사용
     Point p2(10, 20);
-    Point* pp3 = new Point(20,30);  // 동적 할당
+    Point* pp3 = new Point(20,30);  // 동적 할당 
     Point& p3 = *pp3;
 
+    int i = MAX(10, 20);
+    double d = MAX(1., 2.1);
+    int j = ABS(-1); // 1
+    double e = ABS(-2.2); // 2.0
+    string s1 = "abcd" , s2 = "---efgh";
+
+    cout << Add<int>(i, j) << endl;
+    cout << Add<double>(d, e) << endl;
+    cout << Add<string>(s1,s2) << endl;
+
+    printf("Point class 변수의 동적 할당 : p3(%d,%d)\n\n", pp3->X(), pp3->Y());
     printf("Point class 변수의 동적 할당 : p3(%d,%d)\n\n", p3.X(), p3.Y());
     printf("두 점 p1(%d,%d)과 p2(%d,%d)의 거리는 %f 입니다\n", p1.X(), p1.Y(), p2.X(), p2.Y(), p1.distance(p2));
     Point p4 = p2 + p3;  // a = b + c;  ???    c =  (a += b) + d

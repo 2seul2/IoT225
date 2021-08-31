@@ -6,7 +6,7 @@ void swapValue(int a, int b)
     a = b; b = c;
 }
 
-void swapRef(int& a, int& b)    // 포인터를 사용하지 않음
+void swapRef(int& a, int& b)    // 포인터를 사용하지 않음 
 {
     int c = a;
     a = b; b = c;
