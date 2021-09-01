@@ -37,4 +37,7 @@ public:
 // Memo Box에 입력된 문자열
 	CEdit CMemo2;
 	CEdit CMemo1;
+	afx_msg void OnMnuViewLower();
+	afx_msg void OnMnuViewUpper();
+	afx_msg void OnMnuExit();
 };

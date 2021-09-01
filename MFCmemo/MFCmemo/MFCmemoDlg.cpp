@@ -69,6 +69,9 @@ BEGIN_MESSAGE_MAP(CMFCmemoDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 	ON_BN_CLICKED(IDC_BTN_TEST, &CMFCmemoDlg::OnBnClickedBtnTest)
+	ON_COMMAND(ID_MNU_VIEW_LOWER, &CMFCmemoDlg::OnMnuViewLower)
+	ON_COMMAND(ID_MNU_VIEW_UPPER, &CMFCmemoDlg::OnMnuViewUpper)
+	ON_COMMAND(ID_MNU_EXIT, &CMFCmemoDlg::OnMnuExit)
 END_MESSAGE_MAP()
 
 
@@ -162,7 +165,24 @@ HCURSOR CMFCmemoDlg::OnQueryDragIcon()
 void CMFCmemoDlg::OnBnClickedBtnTest()
 {
 	static int Count = 0;  // 지역변수 : static 변수
+	CString cs,cs1;
 	char buf[1024];
+	char* sp = buf;
+	char *str = "abcdefghijklmnopqrstuvwxyz";
+
+	for (int i = 0; *(str + i); i++)  // i < strlen(str)    * == []
+	{
+		// char 배열 및 포인터를 이용한 경우
+		sprintf(sp,"%02X ", str[i]);
+		while (*sp) sp++;
+
+		// CString class를 이용한 경우
+		cs1.Format("%02X ", str[i]);
+		cs += cs1;
+	}
+	CMemo2.SetWindowTextA(buf);
+	CMemo2.SetWindowTextA(cs);
+
 	//char *str = strMemo.GetBuffer();
 	// 소문자 ==> 대문자  a~z  ===>  A~Z   : 가장 무지막지한 방법
 	//                   (a~z) ===> (a~z) - 0x20
@@ -183,9 +203,36 @@ void CMFCmemoDlg::OnBnClickedBtnTest()
 	////	}
 	////}
 	CString cstr,s1;
-	CMemo1.GetWindowTextA(cstr);
-	if (Count % 2 == 1) s1 = cstr.MakeLower();  // 원본 불변의 법칙
-	else s1 = cstr.MakeUpper();
-	CMemo2.SetWindowTextA(s1);
+	//cstr.;
+	////CMemo1.GetWindowTextA(cstr);
+	////if(((CButton*)GetDlgItem(IDC_RADIO1))->GetState() == true) s1 = cstr.MakeLower();
+	////else if(((CButton*)GetDlgItem(IDC_RADIO2))->GetState() == true) s1 = cstr.MakeUpper();
+	//////if(((CButton*)GetDlgItem(IDC_CHECK1))->GetState() == true) s1 = cstr.MakeLower();
+	//////if (Count % 2 == 1) s1 = cstr.MakeLower();  // 원본 불변의 법칙
+	//////else s1 = cstr.MakeUpper();
+	////CMemo2.SetWindowTextA(s1);
 	Count++;
+}
+
+void CMFCmemoDlg::OnMnuViewLower()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CString cstr,s1;
+	CMemo1.GetWindowTextA(cstr);
+	s1 = cstr.MakeLower();
+	CMemo2.SetWindowTextA(s1);
+}
+
+void CMFCmemoDlg::OnMnuViewUpper()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	CString cstr,s1;
+	CMemo1.GetWindowTextA(cstr);
+	s1 = cstr.MakeUpper();
+	CMemo2.SetWindowTextA(s1);
+}
+
+void CMFCmemoDlg::OnMnuExit()
+{
+	EndDialog(0);
 }
