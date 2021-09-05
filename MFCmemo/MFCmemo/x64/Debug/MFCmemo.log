@@ -1,3 +1,7 @@
-﻿  MFCmemoDlg.cpp
-C:\Users\hulklee1\source\Repos\IoT225\MFCmemo\MFCmemo\MFCmemoDlg.cpp(176,3): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+﻿  CDlgTest.cpp
+  MFCmemo.cpp
+  MFCmemoDlg.cpp
+C:\Users\hulklee1\source\Repos\IoT225\MFCmemo\MFCmemo\MFCmemoDlg.cpp(254,8): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\hulklee1\source\Repos\IoT225\MFCmemo\MFCmemo\MFCmemoDlg.cpp(231,9): warning C4101: 'hd' :참조되지 않은 지역 변수입니다.
+  코드를 생성하고 있습니다...
   MFCmemo.vcxproj -> C:\Users\hulklee1\source\Repos\IoT225\MFCmemo\x64\Debug\MFCmemo.exe
