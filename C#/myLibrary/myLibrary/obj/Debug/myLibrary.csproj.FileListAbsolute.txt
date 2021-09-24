@@ -1,0 +1,8 @@
+C:\Users\hulklee1\source\Repos\IoT225\C#\myLibrary\myLibrary\bin\Debug\myLibrary.dll
+C:\Users\hulklee1\source\Repos\IoT225\C#\myLibrary\myLibrary\bin\Debug\myLibrary.pdb
+C:\Users\hulklee1\source\Repos\IoT225\C#\myLibrary\myLibrary\obj\Debug\myLibrary.frmInput.resources
+C:\Users\hulklee1\source\Repos\IoT225\C#\myLibrary\myLibrary\obj\Debug\myLibrary.csproj.GenerateResource.cache
+C:\Users\hulklee1\source\Repos\IoT225\C#\myLibrary\myLibrary\obj\Debug\myLibrary.csproj.CoreCompileInputs.cache
+C:\Users\hulklee1\source\Repos\IoT225\C#\myLibrary\myLibrary\obj\Debug\myLibrary.dll
+C:\Users\hulklee1\source\Repos\IoT225\C#\myLibrary\myLibrary\obj\Debug\myLibrary.pdb
+C:\Users\hulklee1\source\Repos\IoT225\C#\myLibrary\myLibrary\obj\Debug\myLibrary.csproj.AssemblyReference.cache
