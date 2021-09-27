@@ -1,4 +1,14 @@
-﻿
+﻿// 이 MFC 샘플 소스 코드는 MFC Microsoft Office Fluent 사용자 인터페이스("Fluent UI")를
+// 사용하는 방법을 보여 주며, MFC C++ 라이브러리 소프트웨어에 포함된
+// Microsoft Foundation Classes Reference 및 관련 전자 문서에 대해
+// 추가적으로 제공되는 내용입니다.
+// Fluent UI를 복사, 사용 또는 배포하는 데 대한 사용 약관은 별도로 제공됩니다.
+// Fluent UI 라이선싱 프로그램에 대한 자세한 내용은
+// https://go.microsoft.com/fwlink/?LinkId=238214.
+//
+// Copyright (C) Microsoft Corporation
+// All rights reserved.
+
 // MFCApp1.cpp: 애플리케이션에 대한 클래스 동작을 정의합니다.
 //
 
@@ -57,7 +67,7 @@ CMFCApp1App::CMFCApp1App() noexcept
 // 유일한 CMFCApp1App 개체입니다.
 
 CMFCApp1App theApp;
-CMFCApp1View* theView;
+
 
 // CMFCApp1App 초기화
 
@@ -138,9 +148,6 @@ BOOL CMFCApp1App::InitInstance()
 	// 창 하나만 초기화되었으므로 이를 표시하고 업데이트합니다.
 	m_pMainWnd->ShowWindow(SW_SHOW);
 	m_pMainWnd->UpdateWindow();
-
-	theView = (CMFCApp1View*)((CMainFrame*)AfxGetMainWnd())->GetActiveView();
-
 	return TRUE;
 }
 
@@ -203,6 +210,9 @@ void CMFCApp1App::PreLoadState()
 	bNameValid = strName.LoadString(IDS_EDIT_MENU);
 	ASSERT(bNameValid);
 	GetContextMenuManager()->AddMenu(strName, IDR_POPUP_EDIT);
+	bNameValid = strName.LoadString(IDS_EXPLORER);
+	ASSERT(bNameValid);
+	GetContextMenuManager()->AddMenu(strName, IDR_POPUP_EXPLORER);
 }
 
 void CMFCApp1App::LoadCustomState()
@@ -215,51 +225,5 @@ void CMFCApp1App::SaveCustomState()
 
 // CMFCApp1App 메시지 처리기
 
-static int CTRL = 0;	// 1:press  0:open
-static int SHIFT = 0;
 
-BOOL CMFCApp1App::PreTranslateMessage(MSG* pMsg)
-{
-	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
-	switch (pMsg->message)
-	{
-	case WM_KEYDOWN:
-		switch (pMsg->wParam)
-		{
-		case VK_CONTROL:
-			CTRL = 1;
-			break;
-		case VK_SHIFT:
-			SHIFT = 1;
-			break;
-		case 107:	//	'+'
-		case 187:
-			if (CTRL == 1) { theView->OnZoomin(); return 1; }
-			break;
-		case 109:	//	'-'
-		case 189:
-			if (CTRL == 1) { theView->OnZoomout(); return 1; }
-			break;
-		case VK_F1:  //  'F1' Key 가 눌렸는가?
-		{
-			CAboutDlg dlg;
-			dlg.DoModal();
-			return 0;
-		}
-		default: break;
-		}
-		break;
-	case WM_KEYUP:
-		if (pMsg->wParam == VK_CONTROL)
-		{
-			CTRL = 0;
-		}
-		else if (pMsg->wParam == VK_SHIFT)
-		{
-			SHIFT = 0;
-		}
-		break;
-	}
-	return CWinAppEx::PreTranslateMessage(pMsg);
-}
 

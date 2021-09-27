@@ -303,14 +303,15 @@ void CMFCmemoDlg::OnBnClickedBtnCalltest()
 	//////dlg->CCombo5.GetWindowTextA(cs); cstr += "\r\n" + cs;
 	//////delete dlg;
 
-	CDlgTest dlg;
-	dlg.DoModal();
+	CDlgTest *dlg = new CDlgTest();
+	dlg->Create(IDD_DLG_TEST);
+	dlg->ShowWindow(SW_SHOW);
 	CString cstr,cs;
-	CMemo2.GetWindowTextA(cstr);
-	cstr += "\r\n" + dlg.s1;
-	cstr += "\r\n" + dlg.s2;
-	cstr += "\r\n" + dlg.s3;
-	cstr += "\r\n" + dlg.s4;
-	cstr += "\r\n" + dlg.s5;
-	CMemo2.SetWindowTextA(cstr);
+	//CMemo2.GetWindowTextA(cstr);
+	//cstr += "\r\n" + dlg.s1;
+	//cstr += "\r\n" + dlg.s2;
+	//cstr += "\r\n" + dlg.s3;
+	//cstr += "\r\n" + dlg.s4;
+	//cstr += "\r\n" + dlg.s5;
+	//CMemo2.SetWindowTextA(cstr);
 }

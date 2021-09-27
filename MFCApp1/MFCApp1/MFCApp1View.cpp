@@ -1,4 +1,14 @@
-﻿
+﻿// 이 MFC 샘플 소스 코드는 MFC Microsoft Office Fluent 사용자 인터페이스("Fluent UI")를
+// 사용하는 방법을 보여 주며, MFC C++ 라이브러리 소프트웨어에 포함된
+// Microsoft Foundation Classes Reference 및 관련 전자 문서에 대해
+// 추가적으로 제공되는 내용입니다.
+// Fluent UI를 복사, 사용 또는 배포하는 데 대한 사용 약관은 별도로 제공됩니다.
+// Fluent UI 라이선싱 프로그램에 대한 자세한 내용은
+// https://go.microsoft.com/fwlink/?LinkId=238214.
+//
+// Copyright (C) Microsoft Corporation
+// All rights reserved.
+
 // MFCApp1View.cpp: CMFCApp1View 클래스의 구현
 //
 
@@ -29,8 +39,6 @@ BEGIN_MESSAGE_MAP(CMFCApp1View, CEditView)
 	ON_COMMAND(ID_FILE_PRINT_PREVIEW, &CMFCApp1View::OnFilePrintPreview)
 	ON_WM_CONTEXTMENU()
 	ON_WM_RBUTTONUP()
-	ON_COMMAND(ID_ZOOMIN, &CMFCApp1View::OnZoomin)
-	ON_COMMAND(ID_ZOOMOUT, &CMFCApp1View::OnZoomout)
 END_MESSAGE_MAP()
 
 // CMFCApp1View 생성/소멸
@@ -121,41 +129,3 @@ CMFCApp1Doc* CMFCApp1View::GetDocument() const // 디버그되지 않은 버전�
 
 
 // CMFCApp1View 메시지 처리기
-static int fSize = 14;
-CFont tf;
-void CMFCApp1View::OnZoomin()
-{
-	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	// Client 영역의 문자 크기를 확대
-	LOGFONT lf;
-	//ZeroMemory(&lf, sizeof(lf));
-	//lf.lfHeight = fSize++;
-	if (GetFont() == NULL)
-	{
-		CFont* pFont = CFont::FromHandle((HFONT)GetStockObject(DEFAULT_GUI_FONT));
-		pFont->GetLogFont(&lf);
-	}
-	else GetFont()->GetLogFont(&lf);
-	if (lf.lfHeight < 0) lf.lfHeight = abs(lf.lfHeight);
-	lf.lfHeight++;
-
-	//CFont* cf = new CFont;
-	//cf->DeleteObject();
-	//cf->CreateFontIndirect(&lf);
-	tf.DeleteObject();
-	tf.CreateFontIndirect(&lf);
-	SetFont(&tf);
-}
-
-void CMFCApp1View::OnZoomout()
-{
-	// TODO: 여기에 명령 처리기 코드를 추가합니다.
-	// Client 영역의 문자 크기를 축소
-	LOGFONT lf;
-	GetFont()->GetLogFont(&lf);
-	lf.lfHeight--;
-
-	tf.DeleteObject();
-	tf.CreateFontIndirect(&lf);
-	SetFont(&tf);
-}

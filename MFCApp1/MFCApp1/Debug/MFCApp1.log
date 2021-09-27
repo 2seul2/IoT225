@@ -1,2 +1,71 @@
-﻿  MFCApp1.cpp
-  MFCApp1.vcxproj -> C:\Users\hulklee1\source\Repos\MFCApp1\Debug\MFCApp1.exe
+﻿  ClassView.cpp
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(88,7): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(137,20): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(138,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(140,21): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(141,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(143,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(145,11): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(146,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(147,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(148,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(150,11): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(151,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(152,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(153,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(155,11): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(156,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(157,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(158,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(159,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(161,11): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(162,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(163,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(164,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(165,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(166,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(168,11): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(169,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(170,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(175,37): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(229,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(291,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(302,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\ClassView.cpp(329,2): error C2065: 'm_wndClassView': 선언되지 않은 식별자입니다.
+  FileView.cpp
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(65,7): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(73,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(104,20): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(105,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(107,19): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(109,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(110,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(111,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(112,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(113,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(114,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(116,19): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(118,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(119,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(120,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(121,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(122,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(123,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(125,19): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(127,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(128,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(129,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(130,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(132,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(133,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(134,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(139,38): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(179,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(223,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(234,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+C:\Users\hulklee1\source\Repos\IoT225\MFCApp1\MFCApp1\FileView.cpp(264,2): error C2065: 'm_wndFileView': 선언되지 않은 식별자입니다.
+  MainFrm.cpp
+  MFCApp1.cpp
+  OutputWnd.cpp
+  PropertiesWnd.cpp
+  코드를 생성하고 있습니다...

@@ -1,0 +1,13 @@
+C:\Users\hulklee1\source\Repos\IoT225\C#\myDB\myDB\bin\Debug\myDB.exe.config
+C:\Users\hulklee1\source\Repos\IoT225\C#\myDB\myDB\bin\Debug\myDB.exe
+C:\Users\hulklee1\source\Repos\IoT225\C#\myDB\myDB\bin\Debug\myDB.pdb
+C:\Users\hulklee1\source\Repos\IoT225\C#\myDB\myDB\obj\Debug\myDB.csproj.AssemblyReference.cache
+C:\Users\hulklee1\source\Repos\IoT225\C#\myDB\myDB\obj\Debug\myDB.Form1.resources
+C:\Users\hulklee1\source\Repos\IoT225\C#\myDB\myDB\obj\Debug\myDB.Properties.Resources.resources
+C:\Users\hulklee1\source\Repos\IoT225\C#\myDB\myDB\obj\Debug\myDB.csproj.GenerateResource.cache
+C:\Users\hulklee1\source\Repos\IoT225\C#\myDB\myDB\obj\Debug\myDB.csproj.CoreCompileInputs.cache
+C:\Users\hulklee1\source\Repos\IoT225\C#\myDB\myDB\obj\Debug\myDB.exe
+C:\Users\hulklee1\source\Repos\IoT225\C#\myDB\myDB\obj\Debug\myDB.pdb
+C:\Users\hulklee1\source\Repos\IoT225\C#\myDB\myDB\bin\Debug\myLibrary.dll
+C:\Users\hulklee1\source\Repos\IoT225\C#\myDB\myDB\bin\Debug\myLibrary.pdb
+C:\Users\hulklee1\source\Repos\IoT225\C#\myDB\myDB\obj\Debug\myDB.csproj.CopyComplete
