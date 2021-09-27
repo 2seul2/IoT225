@@ -30,21 +30,22 @@ namespace myDB
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.dbGrid = new System.Windows.Forms.DataGridView();
             this.PopupMenu1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.pmnuColumnAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.pmnuRowAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.menuMain = new System.Windows.Forms.MenuStrip();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuNew = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.mnuMigration = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuOpen = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSave = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuSaveas = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuColumnAdd = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRowAdd = new System.Windows.Forms.ToolStripMenuItem();
@@ -52,12 +53,20 @@ namespace myDB
             this.PopupMenu2 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.test1ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.testCMD2ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnCmd = new System.Windows.Forms.Button();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.sbLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.sbLabel2 = new System.Windows.Forms.ToolStripDropDownButton();
             ((System.ComponentModel.ISupportInitialize)(this.dbGrid)).BeginInit();
             this.PopupMenu1.SuspendLayout();
             this.menuMain.SuspendLayout();
             this.PopupMenu2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // dbGrid
@@ -67,10 +76,10 @@ namespace myDB
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dbGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dbGrid.ContextMenuStrip = this.PopupMenu1;
-            this.dbGrid.Location = new System.Drawing.Point(2, 158);
+            this.dbGrid.Location = new System.Drawing.Point(0, -1);
             this.dbGrid.Name = "dbGrid";
             this.dbGrid.RowTemplate.Height = 23;
-            this.dbGrid.Size = new System.Drawing.Size(743, 288);
+            this.dbGrid.Size = new System.Drawing.Size(745, 190);
             this.dbGrid.TabIndex = 0;
             // 
             // PopupMenu1
@@ -109,24 +118,24 @@ namespace myDB
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripMenuItem1,
+            this.mnuNew,
             this.toolStripMenuItem1,
             this.mnuMigration,
             this.toolStripSeparator1,
-            this.openToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.saveAsToolStripMenuItem,
+            this.mnuOpen,
+            this.mnuSave,
+            this.mnuSaveas,
             this.toolStripSeparator2,
-            this.exitToolStripMenuItem});
+            this.mnuExit});
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.newToolStripMenuItem.Text = "File";
             // 
-            // newToolStripMenuItem1
+            // mnuNew
             // 
-            this.newToolStripMenuItem1.Name = "newToolStripMenuItem1";
-            this.newToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.newToolStripMenuItem1.Text = "New";
+            this.mnuNew.Name = "mnuNew";
+            this.mnuNew.Size = new System.Drawing.Size(180, 22);
+            this.mnuNew.Text = "New";
             // 
             // toolStripMenuItem1
             // 
@@ -145,34 +154,35 @@ namespace myDB
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
-            // openToolStripMenuItem
+            // mnuOpen
             // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.openToolStripMenuItem.Text = "Open";
+            this.mnuOpen.Name = "mnuOpen";
+            this.mnuOpen.Size = new System.Drawing.Size(180, 22);
+            this.mnuOpen.Text = "Open";
+            this.mnuOpen.Click += new System.EventHandler(this.mnuOpen_Click);
             // 
-            // saveToolStripMenuItem
+            // mnuSave
             // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveToolStripMenuItem.Text = "Save";
+            this.mnuSave.Name = "mnuSave";
+            this.mnuSave.Size = new System.Drawing.Size(180, 22);
+            this.mnuSave.Text = "Save";
             // 
-            // saveAsToolStripMenuItem
+            // mnuSaveas
             // 
-            this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveAsToolStripMenuItem.Text = "Save As...";
+            this.mnuSaveas.Name = "mnuSaveas";
+            this.mnuSaveas.Size = new System.Drawing.Size(180, 22);
+            this.mnuSaveas.Text = "Save As...";
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
-            // exitToolStripMenuItem
+            // mnuExit
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
+            this.mnuExit.Name = "mnuExit";
+            this.mnuExit.Size = new System.Drawing.Size(180, 22);
+            this.mnuExit.Text = "Exit";
             // 
             // editToolStripMenuItem
             // 
@@ -186,23 +196,27 @@ namespace myDB
             // mnuColumnAdd
             // 
             this.mnuColumnAdd.Name = "mnuColumnAdd";
-            this.mnuColumnAdd.Size = new System.Drawing.Size(145, 22);
+            this.mnuColumnAdd.Size = new System.Drawing.Size(180, 22);
             this.mnuColumnAdd.Text = "Column 추가";
             this.mnuColumnAdd.Click += new System.EventHandler(this.mnuColumnAdd_Click);
             // 
             // mnuRowAdd
             // 
             this.mnuRowAdd.Name = "mnuRowAdd";
-            this.mnuRowAdd.Size = new System.Drawing.Size(145, 22);
+            this.mnuRowAdd.Size = new System.Drawing.Size(180, 22);
             this.mnuRowAdd.Text = "Row 추가";
             this.mnuRowAdd.Click += new System.EventHandler(this.mnuRowAdd_Click);
             // 
             // tbInput
             // 
+            this.tbInput.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tbInput.ContextMenuStrip = this.PopupMenu2;
-            this.tbInput.Location = new System.Drawing.Point(85, 56);
+            this.tbInput.Location = new System.Drawing.Point(0, 0);
+            this.tbInput.Multiline = true;
             this.tbInput.Name = "tbInput";
-            this.tbInput.Size = new System.Drawing.Size(108, 21);
+            this.tbInput.Size = new System.Drawing.Size(745, 199);
             this.tbInput.TabIndex = 2;
             // 
             // PopupMenu2
@@ -225,28 +239,64 @@ namespace myDB
             this.testCMD2ToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.testCMD2ToolStripMenuItem.Text = "Test CMD 2";
             // 
-            // btnCmd
-            // 
-            this.btnCmd.Location = new System.Drawing.Point(210, 56);
-            this.btnCmd.Name = "btnCmd";
-            this.btnCmd.Size = new System.Drawing.Size(75, 23);
-            this.btnCmd.TabIndex = 3;
-            this.btnCmd.Text = "Go";
-            this.btnCmd.UseVisualStyleBackColor = true;
-            this.btnCmd.Click += new System.EventHandler(this.btnCmd_Click);
-            // 
             // openFileDialog
             // 
             this.openFileDialog.FileName = "openFileDialog1";
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.splitContainer1.Location = new System.Drawing.Point(0, 27);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.tbInput);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.dbGrid);
+            this.splitContainer1.Size = new System.Drawing.Size(745, 395);
+            this.splitContainer1.SplitterDistance = 202;
+            this.splitContainer1.TabIndex = 3;
+            // 
+            // statusStrip
+            // 
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sbLabel1,
+            this.sbLabel2});
+            this.statusStrip.Location = new System.Drawing.Point(0, 425);
+            this.statusStrip.Name = "statusStrip";
+            this.statusStrip.Size = new System.Drawing.Size(745, 22);
+            this.statusStrip.TabIndex = 4;
+            this.statusStrip.Text = "statusStrip1";
+            // 
+            // sbLabel1
+            // 
+            this.sbLabel1.Name = "sbLabel1";
+            this.sbLabel1.Size = new System.Drawing.Size(54, 17);
+            this.sbLabel1.Text = "sbLabel1";
+            // 
+            // sbLabel2
+            // 
+            this.sbLabel2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.sbLabel2.Image = ((System.Drawing.Image)(resources.GetObject("sbLabel2.Image")));
+            this.sbLabel2.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.sbLabel2.Name = "sbLabel2";
+            this.sbLabel2.Size = new System.Drawing.Size(67, 20);
+            this.sbLabel2.Text = "sbLabel2";
+            this.sbLabel2.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.sbLabel2_DropDownItemClicked);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(745, 447);
-            this.Controls.Add(this.btnCmd);
-            this.Controls.Add(this.tbInput);
-            this.Controls.Add(this.dbGrid);
+            this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuMain);
             this.MainMenuStrip = this.menuMain;
             this.Name = "Form1";
@@ -258,6 +308,13 @@ namespace myDB
             this.menuMain.ResumeLayout(false);
             this.menuMain.PerformLayout();
             this.PopupMenu2.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel1.PerformLayout();
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -268,17 +325,16 @@ namespace myDB
         private System.Windows.Forms.DataGridView dbGrid;
         private System.Windows.Forms.MenuStrip menuMain;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem mnuNew;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem mnuMigration;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuOpen;
+        private System.Windows.Forms.ToolStripMenuItem mnuSave;
+        private System.Windows.Forms.ToolStripMenuItem mnuSaveas;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuExit;
         private System.Windows.Forms.TextBox tbInput;
-        private System.Windows.Forms.Button btnCmd;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuColumnAdd;
         private System.Windows.Forms.ToolStripMenuItem mnuRowAdd;
@@ -289,6 +345,10 @@ namespace myDB
         private System.Windows.Forms.ToolStripMenuItem test1ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem testCMD2ToolStripMenuItem;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.StatusStrip statusStrip;
+        private System.Windows.Forms.ToolStripStatusLabel sbLabel1;
+        private System.Windows.Forms.ToolStripDropDownButton sbLabel2;
     }
 }
 
