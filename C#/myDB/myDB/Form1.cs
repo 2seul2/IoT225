@@ -35,7 +35,7 @@ namespace myDB
 
         private void btnCmd_Click(object sender, EventArgs e)
         {
-            dbGrid.Columns.Add(tbInput.Text, tbInput.Text);
+            dbGrid.Columns.Add(tbMemo.Text, tbMemo.Text);
         }
 
         private void mnuColumnAdd_Click(object sender, EventArgs e)
@@ -96,6 +96,7 @@ namespace myDB
         SqlConnection sqlConn = new SqlConnection();
         SqlCommand sqlCmd = new SqlCommand();
         string ConnString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=E:\Source\Repos\IoT225\C#\myDatabase.mdf;Integrated Security=True;Connect Timeout=30";
+        string CurrentTable = "";
         private void mnuOpen_Click(object sender, EventArgs e)
         {
             bool vn = openFileDialog.ValidateNames;
@@ -119,31 +120,12 @@ namespace myDB
                 {
                     sbLabel2.DropDownItems.Add(dt.Rows[i].ItemArray[2].ToString());
                 }
+                sbLabel2.Text = "dbTables";
             }
             catch(Exception e1)
             {
                 MessageBox.Show(e1.Message);
             }
-                //sqlCmd.CommandText = "select * from student";
-                //SqlDataReader sdr = sqlCmd.ExecuteReader();
-
-                //dbGrid.Rows.Clear();
-                //dbGrid.Columns.Clear();
-                //for(int i = 0; i<sdr.FieldCount; i++)
-                //{
-                //    string s = sdr.GetName(i);
-                //    dbGrid.Columns.Add(s, s);
-                //}
-                //for(int i = 0;sdr.Read();i++)
-                //{
-                //    int rIdx = dbGrid.Rows.Add();
-                //    for (int j = 0; j < sdr.FieldCount; j++)
-                //    {
-                //        object obj = sdr.GetValue(j);
-                //        dbGrid.Rows[rIdx].Cells[j].Value = obj;
-                //    }
-                //}
-                //sdr.Close();
             finally
             {
                 openFileDialog.ValidateNames = vn;
@@ -153,6 +135,78 @@ namespace myDB
         private void sbLabel2_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             sbLabel2.Text = e.ClickedItem.Text;
+            RunSql($"select * from {e.ClickedItem.Text}");
+        }
+
+        char[] ca = { ' ', '\t', '\r', '\n' };  // white space array
+        public int RunSql(string sql)  // 모든 SQL 명령어를 처리
+        {  // ex)  select * from          student where code < 4 / SELECT  /Select  / selEct
+            sqlCmd.CommandText = sql;
+
+            string sCmd = sql.Trim().Substring(0, 6); //mylib.GetToken(0, sql.Trim(), ' ');
+            if(sCmd.ToLower() == "select")
+            {
+                int n1 = sql.ToLower().IndexOf("from");
+                string s1 = sql.Substring(n1 + 4).Trim();    //student  where code < 4 
+                CurrentTable = s1.Split(ca)[0];
+                sbLabel2.Text = CurrentTable;
+                //CurrentTable = sql.Substring(sql.ToLower().IndexOf("from") + 4).Trim().Split(ca)[0];
+
+                SqlDataReader sdr = sqlCmd.ExecuteReader();
+
+                dbGrid.Rows.Clear();
+                dbGrid.Columns.Clear();
+                for (int i = 0; i < sdr.FieldCount; i++)
+                {
+                    string s = sdr.GetName(i);
+                    dbGrid.Columns.Add(s, s);
+                }
+                for (int i = 0; sdr.Read(); i++)
+                {
+                    int rIdx = dbGrid.Rows.Add();
+                    for (int j = 0; j < sdr.FieldCount; j++)
+                    {
+                        object obj = sdr.GetValue(j);
+                        dbGrid.Rows[rIdx].Cells[j].Value = obj;
+                    }
+                }
+                sdr.Close();
+                return 0;
+            }
+            else
+            {
+                return sqlCmd.ExecuteNonQuery();
+            }
+        }
+
+        private void mnuExcute_Click(object sender, EventArgs e)
+        {
+            RunSql(tbMemo.Text);
+        }
+
+        private void tbMemo_KeyDown(object sender, KeyEventArgs e)
+        {  // SHIFT + [Enter]
+            if(e.Shift == true && e.KeyCode == Keys.Enter)
+            {
+                RunSql(tbMemo.Text);
+            }
+        }
+
+        private void pmnuExecute_Click(object sender, EventArgs e)
+        {
+            RunSql(tbMemo.SelectedText);
+        }
+
+        private void pmnuUpdate_Click(object sender, EventArgs e)
+        {   // update [Table] set [Column=value,,,] where <code=rowVal>
+            int x = dbGrid.SelectedCells[0].ColumnIndex;
+            int y = dbGrid.SelectedCells[0].RowIndex;
+            string s1 = dbGrid.Columns[x].HeaderText;
+            object s2 = dbGrid.SelectedCells[0].Value;
+            string o1 = dbGrid.Columns[0].HeaderText;
+            object o2 = dbGrid.Rows[y].Cells[0].Value;
+            string sql = $"update {CurrentTable} set {s1}={s2} where {o1}={o2}";
+            RunSql(sql);
         }
     }
 }
