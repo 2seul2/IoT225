@@ -62,6 +62,7 @@ namespace myDB
             this.pmnuUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.pmnuInsert = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripSeparator();
+            this.pmnuDelete = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dbGrid)).BeginInit();
             this.PopupMenu1.SuspendLayout();
             this.menuMain.SuspendLayout();
@@ -91,11 +92,12 @@ namespace myDB
             this.PopupMenu1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.pmnuUpdate,
             this.pmnuInsert,
+            this.pmnuDelete,
             this.toolStripMenuItem2,
             this.pmnuColumnAdd,
             this.pmnuRowAdd});
             this.PopupMenu1.Name = "PopupMenu1";
-            this.PopupMenu1.Size = new System.Drawing.Size(181, 120);
+            this.PopupMenu1.Size = new System.Drawing.Size(181, 142);
             // 
             // pmnuColumnAdd
             // 
@@ -320,11 +322,19 @@ namespace myDB
             this.pmnuInsert.Name = "pmnuInsert";
             this.pmnuInsert.Size = new System.Drawing.Size(180, 22);
             this.pmnuInsert.Text = "DB insert";
+            this.pmnuInsert.Click += new System.EventHandler(this.pmnuInsert_Click);
             // 
             // toolStripMenuItem2
             // 
             this.toolStripMenuItem2.Name = "toolStripMenuItem2";
             this.toolStripMenuItem2.Size = new System.Drawing.Size(177, 6);
+            // 
+            // pmnuDelete
+            // 
+            this.pmnuDelete.Name = "pmnuDelete";
+            this.pmnuDelete.Size = new System.Drawing.Size(180, 22);
+            this.pmnuDelete.Text = "레코드 삭제";
+            this.pmnuDelete.Click += new System.EventHandler(this.pmnuDelete_Click);
             // 
             // Form1
             // 
@@ -389,6 +399,7 @@ namespace myDB
         private System.Windows.Forms.ToolStripMenuItem pmnuUpdate;
         private System.Windows.Forms.ToolStripMenuItem pmnuInsert;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem2;
+        private System.Windows.Forms.ToolStripMenuItem pmnuDelete;
     }
 }
 

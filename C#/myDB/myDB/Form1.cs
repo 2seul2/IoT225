@@ -205,8 +205,69 @@ namespace myDB
             object s2 = dbGrid.SelectedCells[0].Value;
             string o1 = dbGrid.Columns[0].HeaderText;
             object o2 = dbGrid.Rows[y].Cells[0].Value;
-            string sql = $"update {CurrentTable} set {s1}={s2} where {o1}={o2}";
+            string sql = $"update {CurrentTable} set {s1}='{s2}' where {o1}='{o2}'";
             RunSql(sql);
+        }
+
+        private void pmnuInsert_Click(object sender, EventArgs e)
+        {   // 1 : insert into [Table] values (value,,,)
+            // 2 : insert into [Table] (field1, field2,,,) values (val1,val2,,)
+            try
+            {
+                string s1 = "(";
+                string s2 = "(";
+                for (int i = 0; i < dbGrid.ColumnCount; i++)
+                {
+                    if (i != 0) 
+                    { 
+                        s1 += ","; s2 += ","; 
+                    }
+                    s1 += $"{dbGrid.Columns[i].HeaderText}";
+                    s2 += $"'{dbGrid.SelectedRows[0].Cells[i].Value}'";
+                }
+                s1 += ")"; s2 += ")"; 
+
+                string sql = $"insert into {CurrentTable} {s1} values {s2}";
+
+                ////string sql = $"insert into {CurrentTable} (";
+                ////for(int i=0;i<dbGrid.ColumnCount;i++)
+                ////{
+                ////    if (i != 0) sql += ",";
+                ////    sql += $"{dbGrid.Columns[i].HeaderText}";
+                ////}
+                ////sql += ") values (";
+                ////for(int i=0;i<dbGrid.ColumnCount;i++)
+                ////{
+                ////    if (i != 0) sql += ",";
+                ////    sql += $"'{dbGrid.SelectedRows[0].Cells[i].Value}'";
+                ////}
+                ////sql += ")";
+                RunSql(sql);
+            }
+            catch(Exception e1)
+            {
+                MessageBox.Show(e1.Message);
+            }
+        }
+
+        private void pmnuDelete_Click(object sender, EventArgs e)
+        {   // DELETE student WHERE code=4 AND name=‘사번’ AND kor=50
+            string sql = $"DELETE {CurrentTable} WHERE ";
+            try
+            {
+                for(int i = 0; i < dbGrid.ColumnCount; i++)
+                {
+                    if (dbGrid.SelectedRows[0].Cells[i].Value == null ||
+                       dbGrid.SelectedRows[0].Cells[i].Value.ToString() == "") continue;
+                    if (i != 0) sql += " AND ";
+                    sql += $"{dbGrid.Columns[i].HeaderText}='{dbGrid.SelectedRows[0].Cells[i].Value}'";
+                }
+                RunSql(sql);
+            }
+            catch(Exception e1)
+            {
+                MessageBox.Show(e1.Message);
+            }
         }
     }
 }
