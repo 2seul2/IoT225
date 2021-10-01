@@ -69,11 +69,12 @@ namespace myDB
 
             dbGrid.Rows.Clear();
             dbGrid.Columns.Clear();
-            StreamReader sr = new StreamReader(openFileDialog.FileName);
+            Encoding ec = (mnuTextUtf8.Checked == true) ? Encoding.UTF8 : Encoding.Default;
+            StreamReader sr = new StreamReader(openFileDialog.FileName, ec ,true);
             string buf = sr.ReadLine();
-            byte[] bb1 = Encoding.Convert(Encoding.ASCII, Encoding.Default, Encoding.Default.GetBytes(buf));
-            string bb2 = Encoding.Default.GetString(bb1);
-            string[] sArr = bb2.Split(',');
+            ////byte[] bb1 = Encoding.Convert(Encoding.ASCII, Encoding.Default, Encoding.Default.GetBytes(buf));
+            ////string bb2 = Encoding.Default.GetString(bb1);
+            string[] sArr = buf.Split(',');
             for(int i=0; i<sArr.Length;i++)
             {
                 dbGrid.Columns.Add(sArr[i], sArr[i]);
@@ -143,58 +144,115 @@ namespace myDB
         {  // ex)  select * from          student where code < 4 / SELECT  /Select  / selEct
             sqlCmd.CommandText = sql;
 
-            string sCmd = sql.Trim().Substring(0, 6); //mylib.GetToken(0, sql.Trim(), ' ');
-            if(sCmd.ToLower() == "select")
+            try
             {
-                int n1 = sql.ToLower().IndexOf("from");
-                string s1 = sql.Substring(n1 + 4).Trim();    //student  where code < 4 
-                CurrentTable = s1.Split(ca)[0];
-                sbLabel2.Text = CurrentTable;
-                //CurrentTable = sql.Substring(sql.ToLower().IndexOf("from") + 4).Trim().Split(ca)[0];
-
-                SqlDataReader sdr = sqlCmd.ExecuteReader();
-
-                dbGrid.Rows.Clear();
-                dbGrid.Columns.Clear();
-                for (int i = 0; i < sdr.FieldCount; i++)
+                string sCmd = sql.Trim().Substring(0, 6); //mylib.GetToken(0, sql.Trim(), ' ');
+                if (sCmd.ToLower() == "select")
                 {
-                    string s = sdr.GetName(i);
-                    dbGrid.Columns.Add(s, s);
-                }
-                for (int i = 0; sdr.Read(); i++)
-                {
-                    int rIdx = dbGrid.Rows.Add();
-                    for (int j = 0; j < sdr.FieldCount; j++)
+                    int n1 = sql.ToLower().IndexOf("from");
+                    string s1 = sql.Substring(n1 + 4).Trim();    //student  where code < 4 
+                    CurrentTable = s1.Split(ca)[0];
+                    sbLabel2.Text = CurrentTable;
+                    //CurrentTable = sql.Substring(sql.ToLower().IndexOf("from") + 4).Trim().Split(ca)[0];
+
+                    SqlDataReader sdr = sqlCmd.ExecuteReader();
+
+                    dbGrid.Rows.Clear();
+                    dbGrid.Columns.Clear();
+                    for (int i = 0; i < sdr.FieldCount; i++)
                     {
-                        object obj = sdr.GetValue(j);
-                        dbGrid.Rows[rIdx].Cells[j].Value = obj;
+                        string s = sdr.GetName(i);
+                        dbGrid.Columns.Add(s, s);
                     }
+                    for (int i = 0; sdr.Read(); i++)
+                    {
+                        int rIdx = dbGrid.Rows.Add();
+                        for (int j = 0; j < sdr.FieldCount; j++)
+                        {
+                            object obj = sdr.GetValue(j);
+                            dbGrid.Rows[rIdx].Cells[j].Value = obj;
+                        }
+                    }
+                    sdr.Close();
+                    return 0;
                 }
-                sdr.Close();
-                return 0;
+                else
+                {
+                    return sqlCmd.ExecuteNonQuery();
+                }
             }
-            else
+            catch(Exception e1)
             {
-                return sqlCmd.ExecuteNonQuery();
+                MessageBox.Show(e1.Message); return -1;
+            }
+        }
+
+        public string RunSql_noEcho(string sql)  // 모든 SQL 명령어를 처리  -  조회 결과를 문자열로 반환
+        {  // ex)  select * from          student where code < 4 / SELECT  /Select  / selEct
+            sqlCmd.CommandText = sql;
+
+            try
+            {
+                string sCmd = sql.Trim().Substring(0, 6); //mylib.GetToken(0, sql.Trim(), ' ');
+                if (sCmd.ToLower() == "select")
+                {
+                    int n1 = sql.ToLower().IndexOf("from");
+                    string s1 = sql.Substring(n1 + 4).Trim();    //student  where code < 4 
+                    CurrentTable = s1.Split(ca)[0];
+                    sbLabel2.Text = CurrentTable;
+                    //CurrentTable = sql.Substring(sql.ToLower().IndexOf("from") + 4).Trim().Split(ca)[0];
+
+                    SqlDataReader sdr = sqlCmd.ExecuteReader();
+
+                    string sRet = sdr.GetName(0);
+                    for (int i = 1; i < sdr.FieldCount; i++)
+                    {
+                        sRet += $",{sdr.GetName(i)}";
+                    }
+                    sRet += "\r\n";
+
+                    for (int i = 0; sdr.Read(); i++)
+                    {
+                        sRet += sdr.GetValue(0);
+                        for (int j = 1; j < sdr.FieldCount; j++)
+                        {
+                            sRet += $",{sdr.GetValue(j)}";
+                        }
+                        sRet += "\r\n";
+                    }
+                    sdr.Close();
+                    return sRet;
+                }
+                else
+                {
+                    return $"{sqlCmd.ExecuteNonQuery()}";
+                }
+            }
+            catch(Exception e1)
+            {
+                MessageBox.Show(e1.Message); return e1.Message;
             }
         }
 
         private void mnuExcute_Click(object sender, EventArgs e)
         {
-            RunSql(tbMemo.Text);
+            if (mnuEchoGrid.Checked) RunSql(tbMemo.Text);
+            else RunSql_noEcho(tbMemo.Text);
         }
 
         private void tbMemo_KeyDown(object sender, KeyEventArgs e)
         {  // SHIFT + [Enter]
             if(e.Shift == true && e.KeyCode == Keys.Enter)
             {
-                RunSql(tbMemo.Text);
+                if (mnuEchoGrid.Checked) RunSql(tbMemo.Text);
+                else RunSql_noEcho(tbMemo.Text);
             }
         }
 
         private void pmnuExecute_Click(object sender, EventArgs e)
         {
-            RunSql(tbMemo.SelectedText);
+            if (mnuEchoGrid.Checked) RunSql(tbMemo.SelectedText);
+            else RunSql_noEcho(tbMemo.SelectedText);
         }
 
         private void pmnuUpdate_Click(object sender, EventArgs e)
@@ -205,11 +263,11 @@ namespace myDB
             object s2 = dbGrid.SelectedCells[0].Value;
             string o1 = dbGrid.Columns[0].HeaderText;
             object o2 = dbGrid.Rows[y].Cells[0].Value;
-            string sql = $"update {CurrentTable} set {s1}='{s2}' where {o1}='{o2}'";
+            string sql = $"update {CurrentTable} set {s1}=N'{s2}' where {o1}=N'{o2}'";
             RunSql(sql);
         }
 
-        private void pmnuInsert_Click(object sender, EventArgs e)
+        public  void Insert_Proc(int nRow)
         {   // 1 : insert into [Table] values (value,,,)
             // 2 : insert into [Table] (field1, field2,,,) values (val1,val2,,)
             try
@@ -218,14 +276,14 @@ namespace myDB
                 string s2 = "(";
                 for (int i = 0; i < dbGrid.ColumnCount; i++)
                 {
-                    if (i != 0) 
-                    { 
-                        s1 += ","; s2 += ","; 
+                    if (i != 0)
+                    {
+                        s1 += ","; s2 += ",";
                     }
                     s1 += $"{dbGrid.Columns[i].HeaderText}";
-                    s2 += $"'{dbGrid.SelectedRows[0].Cells[i].Value}'";
+                    s2 += $"N'{dbGrid.Rows[nRow].Cells[i].Value}'";
                 }
-                s1 += ")"; s2 += ")"; 
+                s1 += ")"; s2 += ")";
 
                 string sql = $"insert into {CurrentTable} {s1} values {s2}";
 
@@ -244,10 +302,15 @@ namespace myDB
                 ////sql += ")";
                 RunSql(sql);
             }
-            catch(Exception e1)
+            catch (Exception e1)
             {
                 MessageBox.Show(e1.Message);
             }
+        }
+
+        private void pmnuInsert_Click(object sender, EventArgs e)
+        {
+            Insert_Proc(dbGrid.SelectedRows[0].Index);
         }
 
         private void pmnuDelete_Click(object sender, EventArgs e)
@@ -263,11 +326,159 @@ namespace myDB
                     sql += $"{dbGrid.Columns[i].HeaderText}='{dbGrid.SelectedRows[0].Cells[i].Value}'";
                 }
                 RunSql(sql);
+                dbGrid.Rows.Remove(dbGrid.SelectedRows[0]);
+            }
+            catch (Exception e1)
+            {
+                MessageBox.Show(e1.Message);
+            }
+        }
+
+        private void pmnuDeleteColumn_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult ret = MessageBox.Show("정말요?", "컬럼 삭제", MessageBoxButtons.OKCancel);
+                if(ret == DialogResult.OK)
+                    dbGrid.Columns.RemoveAt(dbGrid.SelectedCells[0].ColumnIndex);
             }
             catch(Exception e1)
             {
                 MessageBox.Show(e1.Message);
             }
+        }
+
+        private void pmnuDeleteRow_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                DialogResult ret = MessageBox.Show("정말요?", "레코드 삭제", MessageBoxButtons.OKCancel);
+                if(ret == DialogResult.OK)
+                    dbGrid.Rows.Remove(dbGrid.SelectedRows[0]);
+            }
+            catch(Exception e1)
+            {
+                MessageBox.Show(e1.Message);
+            }
+        }
+
+        private void mnuMigrationImport_Click(object sender, EventArgs e)
+        {
+            //mnuMigration_Click(sender, e);
+            if(openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                Encoding enc;
+                if (mnuTextUtf8.Checked == true) enc = Encoding.UTF8;
+                else enc = Encoding.Default; // ANSI
+
+                byte[] bArrOrg = File.ReadAllBytes(openFileDialog.FileName);  // Raw data : Low level data
+                byte[] bArr = Encoding.Convert(enc, Encoding.Default, bArrOrg);
+                string str = Encoding.Default.GetString(bArr); // All Text
+                tbMemo.Text += str;
+                string[] sArr = str.Split('\n');
+                string[] sa1 = sArr[0].Trim().Split(',');
+                for(int i=0;i<sa1.Length;i++)
+                {
+                    dbGrid.Columns.Add(sa1[i], sa1[i]);
+                }
+                for(int k=1;k<sArr.Length;k++)
+                {
+                    sa1 = sArr[k].Trim().Split(',');
+                    dbGrid.Rows.Add(sa1);
+                    //int n = dbGrid.Rows.Add();
+                    //for (int i = 0; i < sa1.Length; i++)
+                    //{
+                    //    dbGrid.Rows[n].Cells[i].Value = sa1[i];
+                    //}
+                }
+            }
+        }
+
+        private void mnuMigrationExport_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sd = new SaveFileDialog();
+            if(sd.ShowDialog() == DialogResult.OK)
+            {
+                StreamWriter sw = new StreamWriter(sd.FileName);
+                string sbuf = "";
+                for(int i = 0 ; i < dbGrid.ColumnCount ; i++)
+                {
+                    if (i != 0) sbuf += ",";
+                    sbuf += dbGrid.Columns[i].HeaderText;
+                }
+                sw.WriteLine(sbuf);
+                for(int k = 0 ; k < dbGrid.RowCount-1 ; k++)
+                {
+                    sbuf = "";
+                    for(int i = 0 ; i < dbGrid.ColumnCount ; i++)
+                    {
+                        if (i != 0) sbuf += ",";
+                        string s1 = "";
+                        if(dbGrid.Rows[k].Cells[i].Value != null)
+                            s1 = dbGrid.Rows[k].Cells[i].Value.ToString().Trim();
+                        sbuf += s1;
+                    }
+                    sw.WriteLine(sbuf);
+                }
+                sw.Close();
+            }
+        }
+
+        private void mnuCreateTable_Click(object sender, EventArgs e)
+        {   // create table [Table] ( [field] [type] [not null] ,,, )
+            // create table Test_table (Code varchar(10) not null, Name varchar(10),,, ) 
+            string s1 = mylib.GetInput("Field Name");
+            if (s1 == "") return;
+
+            string sql = $"CREATE TABLE {s1} (";
+            for(int i=0; i<dbGrid.ColumnCount; i++)
+            {
+                if (i != 0) sql += ",";
+                sql += dbGrid.Columns[i].HeaderText;
+                sql += " varchar(10) ";
+                if (i == 0) sql += " not null ";
+            }
+            sql += ")";
+            RunSql(sql);
+            CurrentTable = s1;
+
+            for(int i=0; i<dbGrid.RowCount; i++)
+            {
+                Insert_Proc(i);
+            }
+        }
+
+        private void mnuTextUtf8_Click(object sender, EventArgs e)
+        {
+            mnuTextUtf8.Checked = true;
+            mnuTextAnsi.Checked = false;
+        }
+
+        private void mnuTextAnsi_Click(object sender, EventArgs e)
+        {
+            mnuTextAnsi.Checked = true;
+            mnuTextUtf8.Checked = false;
+        }
+
+        private void pmnuColumnInfo_Click(object sender, EventArgs e)
+        {
+            int nCol = dbGrid.SelectedCells[0].ColumnIndex;
+            string sCol = dbGrid.Columns[nCol].HeaderText;
+
+            string str = RunSql_noEcho("select Table_name,column_name,data_type,character_maximum_length,is_nullable "+
+                          " from information_schema.columns "+
+                          $" where column_name = '{sCol}' and table_name='{CurrentTable}'");
+            tbMemo.Text += str;
+        }
+
+        private void mnuEchoGrid_Click(object sender, EventArgs e)
+        {
+            mnuEchoText.Checked = false;
+        }
+
+        private void mnuEchoText_Click(object sender, EventArgs e)
+        {
+            mnuEchoGrid.Checked = false;
         }
     }
 }
