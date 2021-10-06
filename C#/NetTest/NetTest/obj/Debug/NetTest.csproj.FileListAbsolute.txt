@@ -1,0 +1,9 @@
+C:\Users\hulklee1\source\Repos\IoT225\C#\NetTest\NetTest\bin\Debug\NetTest.exe.config
+C:\Users\hulklee1\source\Repos\IoT225\C#\NetTest\NetTest\bin\Debug\NetTest.exe
+C:\Users\hulklee1\source\Repos\IoT225\C#\NetTest\NetTest\bin\Debug\NetTest.pdb
+C:\Users\hulklee1\source\Repos\IoT225\C#\NetTest\NetTest\obj\Debug\NetTest.frmNetTest.resources
+C:\Users\hulklee1\source\Repos\IoT225\C#\NetTest\NetTest\obj\Debug\NetTest.Properties.Resources.resources
+C:\Users\hulklee1\source\Repos\IoT225\C#\NetTest\NetTest\obj\Debug\NetTest.csproj.GenerateResource.cache
+C:\Users\hulklee1\source\Repos\IoT225\C#\NetTest\NetTest\obj\Debug\NetTest.csproj.CoreCompileInputs.cache
+C:\Users\hulklee1\source\Repos\IoT225\C#\NetTest\NetTest\obj\Debug\NetTest.exe
+C:\Users\hulklee1\source\Repos\IoT225\C#\NetTest\NetTest\obj\Debug\NetTest.pdb
