@@ -1,7 +1,7 @@
 ﻿
-namespace NetTest
+namespace myChat
 {
-    partial class frmNetTest
+    partial class frmChat
     {
         /// <summary>
         /// 필수 디자이너 변수입니다.
@@ -29,22 +29,20 @@ namespace NetTest
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tbServer = new System.Windows.Forms.TextBox();
             this.tbClient = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnConnect = new System.Windows.Forms.Button();
-            this.tbConnectPort = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.tbConnectIP = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnServerStart = new System.Windows.Forms.Button();
             this.tbServerPort = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.btnServerStart = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnConnect = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbConnectIP = new System.Windows.Forms.TextBox();
+            this.tbConnectPort = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -53,8 +51,8 @@ namespace NetTest
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -71,8 +69,8 @@ namespace NetTest
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 450);
-            this.splitContainer1.SplitterDistance = 565;
+            this.splitContainer1.Size = new System.Drawing.Size(757, 449);
+            this.splitContainer1.SplitterDistance = 540;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -89,137 +87,136 @@ namespace NetTest
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.tbClient);
-            this.splitContainer2.Size = new System.Drawing.Size(565, 450);
-            this.splitContainer2.SplitterDistance = 232;
+            this.splitContainer2.Size = new System.Drawing.Size(540, 449);
+            this.splitContainer2.SplitterDistance = 221;
             this.splitContainer2.TabIndex = 0;
             // 
             // tbServer
             // 
-            this.tbServer.Location = new System.Drawing.Point(7, 7);
+            this.tbServer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbServer.Location = new System.Drawing.Point(6, 5);
             this.tbServer.Multiline = true;
             this.tbServer.Name = "tbServer";
-            this.tbServer.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbServer.Size = new System.Drawing.Size(555, 222);
+            this.tbServer.Size = new System.Drawing.Size(533, 211);
             this.tbServer.TabIndex = 0;
             // 
             // tbClient
             // 
-            this.tbClient.Location = new System.Drawing.Point(7, 3);
+            this.tbClient.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbClient.Location = new System.Drawing.Point(6, 4);
             this.tbClient.Multiline = true;
             this.tbClient.Name = "tbClient";
-            this.tbClient.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.tbClient.Size = new System.Drawing.Size(555, 208);
+            this.tbClient.Size = new System.Drawing.Size(533, 217);
             this.tbClient.TabIndex = 0;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.btnConnect);
-            this.groupBox2.Controls.Add(this.tbConnectPort);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.tbConnectIP);
-            this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Location = new System.Drawing.Point(14, 239);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(205, 125);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Client";
-            // 
-            // btnConnect
-            // 
-            this.btnConnect.Location = new System.Drawing.Point(77, 90);
-            this.btnConnect.Name = "btnConnect";
-            this.btnConnect.Size = new System.Drawing.Size(100, 23);
-            this.btnConnect.TabIndex = 2;
-            this.btnConnect.Text = "Connect";
-            this.btnConnect.UseVisualStyleBackColor = true;
-            // 
-            // tbConnectPort
-            // 
-            this.tbConnectPort.Location = new System.Drawing.Point(77, 47);
-            this.tbConnectPort.Name = "tbConnectPort";
-            this.tbConnectPort.Size = new System.Drawing.Size(100, 21);
-            this.tbConnectPort.TabIndex = 1;
-            this.tbConnectPort.Text = "9000";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(44, 52);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(27, 12);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Port";
-            // 
-            // tbConnectIP
-            // 
-            this.tbConnectIP.Location = new System.Drawing.Point(77, 20);
-            this.tbConnectIP.Name = "tbConnectIP";
-            this.tbConnectIP.Size = new System.Drawing.Size(100, 21);
-            this.tbConnectIP.TabIndex = 1;
-            this.tbConnectIP.Text = "127.0.0.1";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(7, 25);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(67, 12);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Connect IP";
             // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.btnServerStart);
-            this.groupBox1.Controls.Add(this.tbServerPort);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Location = new System.Drawing.Point(14, 12);
+            this.groupBox1.Controls.Add(this.tbServerPort);
+            this.groupBox1.Location = new System.Drawing.Point(28, 50);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(205, 118);
-            this.groupBox1.TabIndex = 2;
+            this.groupBox1.Size = new System.Drawing.Size(165, 103);
+            this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Server";
             // 
-            // btnServerStart
-            // 
-            this.btnServerStart.Location = new System.Drawing.Point(77, 79);
-            this.btnServerStart.Name = "btnServerStart";
-            this.btnServerStart.Size = new System.Drawing.Size(100, 23);
-            this.btnServerStart.TabIndex = 2;
-            this.btnServerStart.Text = "Start";
-            this.btnServerStart.UseVisualStyleBackColor = true;
-            this.btnServerStart.Click += new System.EventHandler(this.btnServerStart_Click);
-            // 
             // tbServerPort
             // 
-            this.tbServerPort.Location = new System.Drawing.Point(77, 20);
+            this.tbServerPort.Location = new System.Drawing.Point(78, 20);
             this.tbServerPort.Name = "tbServerPort";
-            this.tbServerPort.Size = new System.Drawing.Size(100, 21);
-            this.tbServerPort.TabIndex = 1;
+            this.tbServerPort.Size = new System.Drawing.Size(72, 21);
+            this.tbServerPort.TabIndex = 0;
             this.tbServerPort.Text = "9000";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 25);
+            this.label1.Location = new System.Drawing.Point(5, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 12);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Port";
+            this.label1.Size = new System.Drawing.Size(67, 12);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Server Port";
             // 
-            // timer1
+            // btnServerStart
             // 
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.btnServerStart.Location = new System.Drawing.Point(7, 69);
+            this.btnServerStart.Name = "btnServerStart";
+            this.btnServerStart.Size = new System.Drawing.Size(143, 23);
+            this.btnServerStart.TabIndex = 2;
+            this.btnServerStart.Text = "Server Start";
+            this.btnServerStart.UseVisualStyleBackColor = true;
+            this.btnServerStart.Click += new System.EventHandler(this.btnServerStart_Click);
             // 
-            // frmNetTest
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.btnConnect);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.label2);
+            this.groupBox2.Controls.Add(this.tbConnectPort);
+            this.groupBox2.Controls.Add(this.tbConnectIP);
+            this.groupBox2.Location = new System.Drawing.Point(28, 243);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(165, 128);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Client";
+            // 
+            // btnConnect
+            // 
+            this.btnConnect.Location = new System.Drawing.Point(7, 99);
+            this.btnConnect.Name = "btnConnect";
+            this.btnConnect.Size = new System.Drawing.Size(143, 23);
+            this.btnConnect.TabIndex = 2;
+            this.btnConnect.Text = "Connect";
+            this.btnConnect.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(5, 24);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(67, 12);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Connect IP";
+            // 
+            // tbConnectIP
+            // 
+            this.tbConnectIP.Location = new System.Drawing.Point(78, 20);
+            this.tbConnectIP.Name = "tbConnectIP";
+            this.tbConnectIP.Size = new System.Drawing.Size(72, 21);
+            this.tbConnectIP.TabIndex = 0;
+            this.tbConnectIP.Text = "127.0.0.1";
+            // 
+            // tbConnectPort
+            // 
+            this.tbConnectPort.Location = new System.Drawing.Point(78, 47);
+            this.tbConnectPort.Name = "tbConnectPort";
+            this.tbConnectPort.Size = new System.Drawing.Size(72, 21);
+            this.tbConnectPort.TabIndex = 0;
+            this.tbConnectPort.Text = "9000";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(34, 50);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 12);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "PORT";
+            // 
+            // frmChat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(757, 449);
             this.Controls.Add(this.splitContainer1);
-            this.Name = "frmNetTest";
-            this.Text = "Form1";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmNetTest_FormClosing);
+            this.Name = "frmChat";
+            this.Text = "myChat ver 1.2";
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -230,10 +227,10 @@ namespace NetTest
             this.splitContainer2.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -246,15 +243,14 @@ namespace NetTest
         private System.Windows.Forms.TextBox tbClient;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnConnect;
-        private System.Windows.Forms.TextBox tbConnectPort;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox tbConnectIP;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tbConnectPort;
+        private System.Windows.Forms.TextBox tbConnectIP;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnServerStart;
-        private System.Windows.Forms.TextBox tbServerPort;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.TextBox tbServerPort;
     }
 }
 

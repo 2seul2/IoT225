@@ -7,3 +7,4 @@ C:\Users\hulklee1\source\Repos\IoT225\C#\NetTest\NetTest\obj\Debug\NetTest.cspro
 C:\Users\hulklee1\source\Repos\IoT225\C#\NetTest\NetTest\obj\Debug\NetTest.csproj.CoreCompileInputs.cache
 C:\Users\hulklee1\source\Repos\IoT225\C#\NetTest\NetTest\obj\Debug\NetTest.exe
 C:\Users\hulklee1\source\Repos\IoT225\C#\NetTest\NetTest\obj\Debug\NetTest.pdb
+C:\Users\hulklee1\source\Repos\IoT225\C#\NetTest\NetTest\obj\Debug\NetTest.csproj.AssemblyReference.cache
