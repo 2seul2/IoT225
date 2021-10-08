@@ -1,0 +1,10 @@
+C:\Users\hulklee1\source\Repos\IoT225\C#\myChat\myChat\bin\Debug\myChat.exe.config
+C:\Users\hulklee1\source\Repos\IoT225\C#\myChat\myChat\bin\Debug\myChat.exe
+C:\Users\hulklee1\source\Repos\IoT225\C#\myChat\myChat\bin\Debug\myChat.pdb
+C:\Users\hulklee1\source\Repos\IoT225\C#\myChat\myChat\obj\Debug\myChat.frmChat.resources
+C:\Users\hulklee1\source\Repos\IoT225\C#\myChat\myChat\obj\Debug\myChat.Properties.Resources.resources
+C:\Users\hulklee1\source\Repos\IoT225\C#\myChat\myChat\obj\Debug\myChat.csproj.GenerateResource.cache
+C:\Users\hulklee1\source\Repos\IoT225\C#\myChat\myChat\obj\Debug\myChat.csproj.CoreCompileInputs.cache
+C:\Users\hulklee1\source\Repos\IoT225\C#\myChat\myChat\obj\Debug\myChat.exe
+C:\Users\hulklee1\source\Repos\IoT225\C#\myChat\myChat\obj\Debug\myChat.pdb
+C:\Users\hulklee1\source\Repos\IoT225\C#\myChat\myChat\obj\Debug\myChat.csproj.AssemblyReference.cache

@@ -44,12 +44,21 @@ namespace myChat
         Thread threadRead = null;    // 입력 문자열 처리 쓰레드
         private void btnServerStart_Click(object sender, EventArgs e)
         {
+            if(listen != null)
+            {
+                if (MessageBox.Show("서버를 다시 시작하시겠습니까?.", "", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    listen.Stop();
+                    if (threadServer != null) threadServer.Abort();
+                    if (threadRead != null) threadRead.Abort();
+                }
+            }
             listen = new TcpListener(int.Parse(tbServerPort.Text));
             listen.Start();
+            AddText($"서버가 [{tbServerPort.Text}] Port에서 시작되었습니다.\r\n", 1);
 
             threadServer = new Thread(ServerProcess);
             threadServer.Start();
-            threadRead = new Thread(ReadProcess);
         }
 
         void ServerProcess()  // Connect 요구 처리 쓰레드
@@ -58,8 +67,15 @@ namespace myChat
             {
                 if(listen.Pending())
                 {
-                    tcp = listen.AcceptTcpClient(); // 세션 수립
-                    AddText("Client [...] 로부터 접속되었습니다\r\n", 1);
+                    if (tcp != null)
+                    {
+                        tcp.Close();
+                        threadRead.Abort();
+                    }
+                    tcp = listen.AcceptTcpClient(); // 세션 수립                    
+                    AddText($"Client [{tcp.Client.RemoteEndPoint.ToString()}] 로부터 접속되었습니다\r\n", 1);
+
+                    threadRead = new Thread(ReadProcess);
                     threadRead.Start();
                 }
                 Thread.Sleep(100);
@@ -79,6 +95,59 @@ namespace myChat
                 }
                 Thread.Sleep(100);
             }
+        }
+
+        private void frmChat_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(threadServer != null) threadServer.Abort();
+            if(threadRead != null) threadRead.Abort();
+            if(threadClientRead != null) threadClientRead.Abort();
+        }
+
+        Thread threadClientRead = null;
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if(sock != null)
+                {
+                    if(MessageBox.Show("재연결하시겠습니까?.", "", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                    {
+                        sock.Close();
+                        threadClientRead.Abort();
+                    }
+                }
+                sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                sock.Connect(tbConnectIP.Text, int.Parse(tbConnectPort.Text));  // Connection 수립 요청 - 대기(Blocking Mode)
+                AddText($"Server [{tbConnectIP.Text}:{tbConnectPort.Text}] Connected OK.", 2);
+                threadClientRead = new Thread(ClientReadProcess);
+                threadClientRead.Start();
+            }
+            catch(Exception e1)
+            {
+                MessageBox.Show(e1.Message);
+            }
+        }
+
+        void ClientReadProcess()
+        {
+            byte[] bArr = new byte[512];
+            while(true)
+            {
+                if(sock.Available > 0)
+                {
+                    int n = sock.Receive(bArr);
+                    AddText($"{Encoding.Default.GetString(bArr, 0, n)}", 2);
+                }
+                Thread.Sleep(100);
+            }
+        }
+
+        private void pmnuSendClientText_Click(object sender, EventArgs e)
+        {
+            string str = (tbClient.SelectedText == "") ? tbClient.Text : tbClient.SelectedText;
+            byte[] bArr = Encoding.Default.GetBytes(str);
+            sock.Send(bArr);
         }
     }
 }

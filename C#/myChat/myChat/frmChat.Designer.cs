@@ -29,6 +29,7 @@ namespace myChat
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.tbServer = new System.Windows.Forms.TextBox();
@@ -43,6 +44,10 @@ namespace myChat
             this.tbConnectIP = new System.Windows.Forms.TextBox();
             this.tbConnectPort = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.popupClient = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.pmnuSendClientText = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.sbLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -53,6 +58,8 @@ namespace myChat
             this.splitContainer2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.popupClient.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -69,8 +76,8 @@ namespace myChat
             // 
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel2.Controls.Add(this.groupBox1);
-            this.splitContainer1.Size = new System.Drawing.Size(757, 449);
-            this.splitContainer1.SplitterDistance = 540;
+            this.splitContainer1.Size = new System.Drawing.Size(763, 441);
+            this.splitContainer1.SplitterDistance = 558;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer2
@@ -87,8 +94,8 @@ namespace myChat
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.tbClient);
-            this.splitContainer2.Size = new System.Drawing.Size(540, 449);
-            this.splitContainer2.SplitterDistance = 221;
+            this.splitContainer2.Size = new System.Drawing.Size(558, 441);
+            this.splitContainer2.SplitterDistance = 213;
             this.splitContainer2.TabIndex = 0;
             // 
             // tbServer
@@ -99,7 +106,7 @@ namespace myChat
             this.tbServer.Location = new System.Drawing.Point(6, 5);
             this.tbServer.Multiline = true;
             this.tbServer.Name = "tbServer";
-            this.tbServer.Size = new System.Drawing.Size(533, 211);
+            this.tbServer.Size = new System.Drawing.Size(551, 203);
             this.tbServer.TabIndex = 0;
             // 
             // tbClient
@@ -107,10 +114,11 @@ namespace myChat
             this.tbClient.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbClient.ContextMenuStrip = this.popupClient;
             this.tbClient.Location = new System.Drawing.Point(6, 4);
             this.tbClient.Multiline = true;
             this.tbClient.Name = "tbClient";
-            this.tbClient.Size = new System.Drawing.Size(533, 217);
+            this.tbClient.Size = new System.Drawing.Size(551, 195);
             this.tbClient.TabIndex = 0;
             // 
             // groupBox1
@@ -174,6 +182,7 @@ namespace myChat
             this.btnConnect.TabIndex = 2;
             this.btnConnect.Text = "Connect";
             this.btnConnect.UseVisualStyleBackColor = true;
+            this.btnConnect.Click += new System.EventHandler(this.btnConnect_Click);
             // 
             // label2
             // 
@@ -209,14 +218,46 @@ namespace myChat
             this.label3.TabIndex = 1;
             this.label3.Text = "PORT";
             // 
+            // popupClient
+            // 
+            this.popupClient.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pmnuSendClientText});
+            this.popupClient.Name = "popupClient";
+            this.popupClient.Size = new System.Drawing.Size(128, 26);
+            // 
+            // pmnuSendClientText
+            // 
+            this.pmnuSendClientText.Name = "pmnuSendClientText";
+            this.pmnuSendClientText.Size = new System.Drawing.Size(127, 22);
+            this.pmnuSendClientText.Text = "Send Text";
+            this.pmnuSendClientText.Click += new System.EventHandler(this.pmnuSendClientText_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sbLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 419);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(763, 22);
+            this.statusStrip1.TabIndex = 2;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // sbLabel1
+            // 
+            this.sbLabel1.Name = "sbLabel1";
+            this.sbLabel1.Size = new System.Drawing.Size(121, 17);
+            this.sbLabel1.Text = "toolStripStatusLabel1";
+            // 
             // frmChat
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(757, 449);
+            this.ClientSize = new System.Drawing.Size(763, 441);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmChat";
             this.Text = "myChat ver 1.2";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmChat_FormClosing);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -231,7 +272,11 @@ namespace myChat
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.popupClient.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -251,6 +296,10 @@ namespace myChat
         private System.Windows.Forms.Button btnServerStart;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbServerPort;
+        private System.Windows.Forms.ContextMenuStrip popupClient;
+        private System.Windows.Forms.ToolStripMenuItem pmnuSendClientText;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel sbLabel1;
     }
 }
 
