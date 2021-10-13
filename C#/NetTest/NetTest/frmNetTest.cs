@@ -98,21 +98,6 @@ namespace NetTest
 
         private void timer1_Tick(object sender, EventArgs e)   // Read Process
         {
-            if (tcp == null) return;
-            timer1.Enabled = false;
-
-            NetworkStream ns = tcp.GetStream();
-            byte[] bArr = new byte[512];
-            while (true)
-            {
-                if (ns.DataAvailable)
-                {
-                    ns.Read(bArr, 0, 512);
-                    tbServer.Text += Encoding.Default.GetString(bArr);
-                    break;
-                }
-            }
-            timer1.Enabled = true;
         }
     }
 }

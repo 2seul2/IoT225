@@ -1,0 +1,13 @@
+C:\Users\hulklee1\source\Repos\Chatting\Chatting\bin\Debug\Chatting.exe.config
+C:\Users\hulklee1\source\Repos\Chatting\Chatting\bin\Debug\Chatting.exe
+C:\Users\hulklee1\source\Repos\Chatting\Chatting\bin\Debug\Chatting.pdb
+C:\Users\hulklee1\source\Repos\Chatting\Chatting\bin\Debug\myLibrary.dll
+C:\Users\hulklee1\source\Repos\Chatting\Chatting\bin\Debug\myLibrary.pdb
+C:\Users\hulklee1\source\Repos\Chatting\Chatting\obj\Debug\Chatting.csproj.AssemblyReference.cache
+C:\Users\hulklee1\source\Repos\Chatting\Chatting\obj\Debug\Chatting.frmChat.resources
+C:\Users\hulklee1\source\Repos\Chatting\Chatting\obj\Debug\Chatting.Properties.Resources.resources
+C:\Users\hulklee1\source\Repos\Chatting\Chatting\obj\Debug\Chatting.csproj.GenerateResource.cache
+C:\Users\hulklee1\source\Repos\Chatting\Chatting\obj\Debug\Chatting.csproj.CoreCompileInputs.cache
+C:\Users\hulklee1\source\Repos\Chatting\Chatting\obj\Debug\Chatting.csproj.CopyComplete
+C:\Users\hulklee1\source\Repos\Chatting\Chatting\obj\Debug\Chatting.exe
+C:\Users\hulklee1\source\Repos\Chatting\Chatting\obj\Debug\Chatting.pdb

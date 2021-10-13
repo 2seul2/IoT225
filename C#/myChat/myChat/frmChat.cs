@@ -22,7 +22,7 @@ namespace myChat
         delegate void cbAddText(string str, int i);
         void AddText(string str,int i)
         {
-            if(tbServer.InvokeRequired || tbClient.InvokeRequired)
+            if(tbServer.InvokeRequired || tbClient.InvokeRequired || statusStrip1.InvokeRequired)
             {
                 cbAddText cb = new cbAddText(AddText);
                 object[] obj = { str, i };
@@ -34,14 +34,17 @@ namespace myChat
                     tbServer.Text += str;
                 else if (i == 2)
                     tbClient.Text += str;
+                else if (i == 3)
+                    sbClientList.DropDownItems.Add(str);
             }
         }
 
         Socket sock = null;
-        TcpClient tcp = null;
+        TcpClient[] tcp = new TcpClient[10];
         TcpListener listen = null;
         Thread threadServer = null;  // Connect 요구 처리 쓰레드
         Thread threadRead = null;    // 입력 문자열 처리 쓰레드
+        int CurrentClientNum = 0;
         private void btnServerStart_Click(object sender, EventArgs e)
         {
             if(listen != null)
@@ -67,31 +70,43 @@ namespace myChat
             {
                 if(listen.Pending())
                 {
-                    if (tcp != null)
-                    {
-                        tcp.Close();
-                        threadRead.Abort();
-                    }
-                    tcp = listen.AcceptTcpClient(); // 세션 수립                    
-                    AddText($"Client [{tcp.Client.RemoteEndPoint.ToString()}] 로부터 접속되었습니다\r\n", 1);
+                    if (CurrentClientNum == 9) break; // Process over
+                    //if (tcp != null)
+                    //{
+                    //    tcp.Close();
+                    //    threadRead.Abort();
+                    //}
+                    tcp[CurrentClientNum] = listen.AcceptTcpClient(); // 세션 수립
+                    string sLabel = tcp[CurrentClientNum].Client.RemoteEndPoint.ToString();  // Client IP Address : Port(Session)
+                    AddText($"Client [{sLabel}] 로부터 접속되었습니다\r\n", 1);
+                    //sbClientList.DropDownItems.Add(sLabel);
+                    AddText(sLabel,3);
+                    sbLabel1.Text = sLabel;
 
-                    threadRead = new Thread(ReadProcess);
-                    threadRead.Start();
+                    if(threadRead == null)
+                    {
+                        threadRead = new Thread(ReadProcess);
+                        threadRead.Start();
+                    }
+                    CurrentClientNum++;
                 }
                 Thread.Sleep(100);
             }
         }
 
-        void ReadProcess()
+        void ReadProcess() // Multi Client : CurrentClinrNum
         {
-            NetworkStream ns = tcp.GetStream();
             byte[] bArr = new byte[512];
             while(true)
             {
-                if(ns.DataAvailable)
+                for(int i=0;i<CurrentClientNum;i++)
                 {
-                    int n = ns.Read(bArr, 0, 512);
-                    AddText(Encoding.Default.GetString(bArr,0,n), 1);
+                    NetworkStream ns = tcp[i].GetStream();
+                    if(ns.DataAvailable)
+                    {
+                        int n = ns.Read(bArr, 0, 512);
+                        AddText(Encoding.Default.GetString(bArr,0,n), 1);
+                    }
                 }
                 Thread.Sleep(100);
             }
@@ -148,6 +163,28 @@ namespace myChat
             string str = (tbClient.SelectedText == "") ? tbClient.Text : tbClient.SelectedText;
             byte[] bArr = Encoding.Default.GetBytes(str);
             sock.Send(bArr);
+        }
+
+        int GetTcpIndex() // Tcp List 중 선택되어 있는 리스트 인덱스를 반환
+        {
+            for (int i = 0; i < CurrentClientNum; i++)
+            {
+                if (tcp[i].Client.RemoteEndPoint.ToString() == sbClientList.Text)
+                    return i;
+            }
+            return -1;
+        }
+
+        private void pmnuSendServerText_Click(object sender, EventArgs e)
+        {
+            string str = (tbServer.SelectedText == "") ? tbServer.Text : tbServer.SelectedText;
+            byte[] bArr = Encoding.Default.GetBytes(str);
+            tcp[GetTcpIndex()].Client.Send(bArr);
+        }
+
+        private void sbClientList_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            sbClientList.Text = e.ClickedItem.Text;
         }
     }
 }
