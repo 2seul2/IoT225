@@ -52,6 +52,19 @@ namespace Chatting
             }
         }
 
+        void AddList(string str)
+        {
+            if(statusStrip1.InvokeRequired)
+            {
+                CB1 cb = new CB1(AddList);
+                Invoke(cb, new object[] { str });
+            }
+            else
+            {
+                sbConnectList.DropDownItems.Add(str);
+            }
+        }
+
         class TcpEx
         {
             public TcpClient tp;
@@ -71,15 +84,17 @@ namespace Chatting
         Thread threadServer = null;
         Thread threadread = null;
 
-        int OperationMode = 0;  // 0 : Server Mode,   1 : Client Mode
+        bool OperationMode = false;  // false : Server Mode,        true : Client Mode
+        string sUID = "Noname";
+        string sPWD = "";
         string ConnectIP = "127.0.0.1";
         int ConnectPort = 9000;
-        int serverPort = 9000;
+        int ServerPort = 9000;
         iniFile ini = new iniFile(@".\chat.ini");
         private void frmChat_Load(object sender, EventArgs e)
         {
-            string test = "\u0003abcdefgh\u0002";
-            byte[] bTest = Encoding.Default.GetBytes(test);
+            //string test = "\u0003abcdefgh\u0002";
+            //byte[] bTest = Encoding.Default.GetBytes(test);
             int X = int.Parse(ini.GetString("Location", "X", "0"));
             int Y = int.Parse(ini.GetString("Location", "Y", "0"));
             Location = new Point(X, Y);
@@ -88,6 +103,12 @@ namespace Chatting
             int DIST =  int.Parse(ini.GetString("Size", "DIST", "350"));
             Size = new Size(SX, SY);
             splitContainer1.SplitterDistance = DIST;
+
+            ServerPort = int.Parse(ini.GetString("Operation","ServerPort","9000"));
+            ConnectPort = int.Parse(ini.GetString("Operation","ConnectPort","9000"));
+            ConnectIP = ini.GetString("Operation", "ConnectIP", "127.0.0.1");
+            sUID = ini.GetString("Operation", "UID", "Noname");
+            sPWD = ini.GetString("Operation", "PWD", ""); // 실제 적용시에는 암호화 처리 후 저장
         }
 
         /// <summary>
@@ -97,7 +118,7 @@ namespace Chatting
         void InitServer()
         {
             if (listen != null) listen.Stop();  // 기존에 수행되고 있는 리스너를 중지
-            listen = new TcpListener(serverPort);
+            listen = new TcpListener(ServerPort);
             listen.Start();
 
             if (threadServer != null) threadServer.Abort();
@@ -108,6 +129,7 @@ namespace Chatting
             threadread = new Thread(ReadProcess);
             threadread.Start();
 
+            sbConnectList.DropDownItems.Add("모두에게");
             //timer1.Start();
         }
 
@@ -117,6 +139,26 @@ namespace Chatting
             if (listen != null) listen.Stop();  // 기존에 수행되고 있는 리스너를 중지
             if (threadServer != null) threadServer.Abort();
             if (threadread != null) threadread.Abort();
+        }
+
+        bool IsAlive(Socket sck)
+        {
+            if (sck == null) return false;
+            if (sck.Connected == false) return false;
+
+            bool b1 = sck.Poll(1000, SelectMode.SelectRead);  // 정상적이면 0 : false  문제있으면 1 : true;
+//            bool b2 = sck.Available == 0;    // 정상적이면 true     아니면  false
+            if (b1) return false;
+
+            try
+            {
+                sck.Send(new byte[1], 0, SocketFlags.OutOfBand);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         void ServerProcess()
@@ -130,8 +172,34 @@ namespace Chatting
                     tp.Client.Send(Encoding.Default.GetBytes($"REQ:{tp.Client.RemoteEndPoint.ToString()}"));
                     int n = tp.Client.Receive(buf);
                     string sId = Encoding.Default.GetString(buf,0,n).Split(':')[1];   // NAM:name
-                    tcp.Add(new TcpEx(tp,sId));     //     Add : List object의 method
-                    AddText($"{sId}({tp.Client.RemoteEndPoint.ToString()})로부터 접속되었습니다.\r\n");
+                    if(sId == "Noname")
+                    {
+                        tp.Client.Send(Encoding.Default.GetBytes($"REJECT:올바른 사용자가 아닙니다\r\n"));
+                        tp.Close();
+                    }
+                    else
+                    {
+                        tp.Client.Send(Encoding.Default.GetBytes($"ACCEPT:접속이 허가되었습니다\r\n"));
+                        tcp.Add(new TcpEx(tp, sId));     //     Add : List object의 method
+                        AddText($"{sId}({tp.Client.RemoteEndPoint.ToString()})로부터 접속되었습니다.\r\n");
+                        //sbConnectList.DropDownItems.Add(sId);
+                        //AddList(sId);
+                        //=================================================
+                        // delegate void CB1(string str);
+                        //if(statusStrip1.InvokeRequired)
+                        //{
+                        //    CB1 cb = new CB1(AddList);
+                        //    Invoke(cb, new object[] { str });
+                        //}
+                        //else
+                        //{
+                        //    sbConnectList.DropDownItems.Add(str);
+                        //}
+                        if (InvokeRequired)
+                        {
+                            Invoke(new MethodInvoker(delegate () { sbConnectList.DropDownItems.Add(sId); }));
+                        }
+                    }
                 }
                 Thread.Sleep(100);
             }
@@ -146,8 +214,8 @@ namespace Chatting
                 {
                     if(tcp[i].tp.Available > 0)  // List object의 [] operator를 이용하여 배열처럼 관리
                     {
-                        tcp[i].tp.Client.Receive(buf);
-                        AddText(Encoding.Default.GetString(buf));
+                        int n = tcp[i].tp.Client.Receive(buf);
+                        AddText(Encoding.Default.GetString(buf, 0, n));
                     }
                 }
                 Thread.Sleep(100);
@@ -158,6 +226,12 @@ namespace Chatting
         {
             CloseServer();
             if (threadClient != null) threadClient.Abort();
+
+            ini.GetString("Operation", "ServerPort", $"{ServerPort}");
+            ini.GetString("Operation", "ConnectPort",$"{ConnectPort}");
+            ini.GetString("Operation", "ConnectIP", ConnectIP);
+            ini.GetString("Operation", "UID", sUID);
+            ini.GetString("Operation", "PWD", sPWD); // 실제 적용시에는 암호화 처리 후 저장
 
             ini.WriteString("Location", "X", $"{Location.X}");
             ini.WriteString("Location", "Y", $"{Location.Y}");
@@ -177,10 +251,22 @@ namespace Chatting
             byte[] buf = new byte[100];
             sock = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             sock.Connect(ConnectIP, ConnectPort);
-            int n = sock.Receive(buf);
+
+            int n = sock.Receive(buf);      //  REQ : 연결수립통보 / myIP 수신
             string myIP = Encoding.Default.GetString(buf, 0, n).Split(':')[1];
-            sock.Send(Encoding.Default.GetBytes($"NAM:{tbTalk.Text}"));
+            AddText($"Return Message : {myIP}\r\n");
+            sock.Send(Encoding.Default.GetBytes($"NAM:{sUID}"));    // my ID 통보
+
+            n = sock.Receive(buf);      //  최종 수락/거부 통보
+            string sRet = Encoding.Default.GetString(buf, 0, n).Split(':')[0];
+            if(sRet == "REJECT") 
+            {
+                AddText("서버로부터 접속이 거부되었습니다.\r\n");
+                return;
+            }
+            AddText("서버와 접속되었습니다.\r\n");
             threadClient = new Thread(ClientProcess);
+            threadClient.Start();
             tbTalk.Text = "";
         }
 
@@ -190,10 +276,13 @@ namespace Chatting
             byte[] buf = new byte[1024];
             while(true)
             {
-                if(sock.Available > 0)
+               // if(IsAlive(sock))
                 {
-                    sock.Receive(buf);
-                    AddText(Encoding.Default.GetString(buf));
+                    if(sock.Available > 0)
+                    {
+                        int n = sock.Receive(buf);
+                        AddText(Encoding.Default.GetString(buf, 0, n));
+                    }
                 }
                 Thread.Sleep(100);
             }
@@ -203,15 +292,62 @@ namespace Chatting
         {
             if(e.KeyCode == Keys.Enter)
             {
-                sock.Send(Encoding.Default.GetBytes(tbTalk.Text));
-                tbTalk.Text = "";
+                if(OperationMode == false)  // Server Mode
+                {
+                    for(int i=0; i<tcp.Count;i++)   // tcp : List <TcpEx>   --> List : 일종의 배열 오브젝트
+                    {
+                        if(sbConnectList.Text == "모두에게" || tcp[i].id == sbConnectList.Text)
+                        {
+                            TcpClient tp = tcp[i].tp;
+                            if(IsAlive(tp.Client))
+                                tp.Client.Send(Encoding.Default.GetBytes(tbTalk.Text));
+                        }
+                    }
+                    tbTalk.Text = "";
+                }
+                else   //  Client Mode
+                {
+                    if(sock != null)
+                    {
+                        if(IsAlive(sock))
+                        {
+                            sock.Send(Encoding.Default.GetBytes(tbTalk.Text));
+                            tbTalk.Text = "";
+                        }
+                        else
+                        {
+                            AddText("서버와의 연결이 끊어졌습니다.\r\n");
+                            sock.Close();
+                            sock = null;
+                        }
+                    }
+                }
             }
         }
 
         private void pmnuServerStart_Click(object sender, EventArgs e)
         {
             InitServer();
-            AddText($"Server가 [{serverPort}] port에서 시작되었습니다.\r\n");
+            AddText($"Server가 [{ServerPort}] port에서 시작되었습니다.\r\n");
+        }
+
+        private void pmnuNetworkConfig_Click(object sender, EventArgs e)
+        {
+            frmNetConfig dlg = new frmNetConfig(ServerPort, ConnectPort, ConnectIP, sUID, sPWD, OperationMode);
+            if(dlg.ShowDialog() == DialogResult.OK)
+            {
+                ServerPort = int.Parse(dlg.tbServerPort.Text);
+                ConnectPort = int.Parse(dlg.tbConnectPort.Text);
+                ConnectIP = dlg.tbConnectIP.Text;
+                sUID = dlg.tbUID.Text;
+                sPWD = dlg.tbPWD.Text;
+                OperationMode = dlg.rbClient.Checked;
+            }
+        }
+
+        private void sbConnectList_DropDownItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+            sbConnectList.Text = e.ClickedItem.Text;
         }
     }
 }

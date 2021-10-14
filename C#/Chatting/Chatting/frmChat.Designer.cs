@@ -30,17 +30,20 @@ namespace Chatting
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmChat));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tbChat = new System.Windows.Forms.TextBox();
             this.tbTalk = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.pmnuServerStart = new System.Windows.Forms.ToolStripMenuItem();
             this.pmnuConnect = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
             this.configToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.networkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pmnuNetworkConfig = new System.Windows.Forms.ToolStripMenuItem();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.pmnuServerStart = new System.Windows.Forms.ToolStripMenuItem();
+            this.sbConnectList = new System.Windows.Forms.ToolStripDropDownButton();
+            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -50,6 +53,8 @@ namespace Chatting
             // 
             // statusStrip1
             // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sbConnectList});
             this.statusStrip1.Location = new System.Drawing.Point(0, 484);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(357, 22);
@@ -97,7 +102,7 @@ namespace Chatting
             this.tbTalk.Location = new System.Drawing.Point(3, 0);
             this.tbTalk.Multiline = true;
             this.tbTalk.Name = "tbTalk";
-            this.tbTalk.Size = new System.Drawing.Size(350, 82);
+            this.tbTalk.Size = new System.Drawing.Size(350, 78);
             this.tbTalk.TabIndex = 0;
             this.tbTalk.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbTalk_KeyDown);
             // 
@@ -109,40 +114,51 @@ namespace Chatting
             this.toolStripMenuItem1,
             this.configToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 98);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(137, 76);
+            // 
+            // pmnuServerStart
+            // 
+            this.pmnuServerStart.Name = "pmnuServerStart";
+            this.pmnuServerStart.Size = new System.Drawing.Size(136, 22);
+            this.pmnuServerStart.Text = "Server Start";
+            this.pmnuServerStart.Click += new System.EventHandler(this.pmnuServerStart_Click);
             // 
             // pmnuConnect
             // 
             this.pmnuConnect.Name = "pmnuConnect";
-            this.pmnuConnect.Size = new System.Drawing.Size(180, 22);
+            this.pmnuConnect.Size = new System.Drawing.Size(136, 22);
             this.pmnuConnect.Text = "Connect";
             this.pmnuConnect.Click += new System.EventHandler(this.pmnuConnect_Click);
             // 
             // toolStripMenuItem1
             // 
             this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(133, 6);
             // 
             // configToolStripMenuItem
             // 
             this.configToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.networkToolStripMenuItem});
+            this.pmnuNetworkConfig});
             this.configToolStripMenuItem.Name = "configToolStripMenuItem";
-            this.configToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.configToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.configToolStripMenuItem.Text = "Config";
             // 
-            // networkToolStripMenuItem
+            // pmnuNetworkConfig
             // 
-            this.networkToolStripMenuItem.Name = "networkToolStripMenuItem";
-            this.networkToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.networkToolStripMenuItem.Text = "Network";
+            this.pmnuNetworkConfig.Name = "pmnuNetworkConfig";
+            this.pmnuNetworkConfig.Size = new System.Drawing.Size(180, 22);
+            this.pmnuNetworkConfig.Text = "Network";
+            this.pmnuNetworkConfig.Click += new System.EventHandler(this.pmnuNetworkConfig_Click);
             // 
-            // pmnuServerStart
+            // sbConnectList
             // 
-            this.pmnuServerStart.Name = "pmnuServerStart";
-            this.pmnuServerStart.Size = new System.Drawing.Size(180, 22);
-            this.pmnuServerStart.Text = "Server Start";
-            this.pmnuServerStart.Click += new System.EventHandler(this.pmnuServerStart_Click);
+            this.sbConnectList.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.sbConnectList.Image = ((System.Drawing.Image)(resources.GetObject("sbConnectList.Image")));
+            this.sbConnectList.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.sbConnectList.Name = "sbConnectList";
+            this.sbConnectList.Size = new System.Drawing.Size(96, 20);
+            this.sbConnectList.Text = "접속자 리스트";
+            this.sbConnectList.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.sbConnectList_DropDownItemClicked);
             // 
             // frmChat
             // 
@@ -155,6 +171,8 @@ namespace Chatting
             this.Text = "Chatting ver 1.2";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmChat_FormClosing);
             this.Load += new System.EventHandler(this.frmChat_Load);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -177,9 +195,10 @@ namespace Chatting
         private System.Windows.Forms.ToolStripMenuItem pmnuConnect;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem configToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem networkToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pmnuNetworkConfig;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ToolStripMenuItem pmnuServerStart;
+        private System.Windows.Forms.ToolStripDropDownButton sbConnectList;
     }
 }
 

@@ -11,3 +11,16 @@ C:\Users\hulklee1\source\Repos\Chatting\Chatting\obj\Debug\Chatting.csproj.CoreC
 C:\Users\hulklee1\source\Repos\Chatting\Chatting\obj\Debug\Chatting.csproj.CopyComplete
 C:\Users\hulklee1\source\Repos\Chatting\Chatting\obj\Debug\Chatting.exe
 C:\Users\hulklee1\source\Repos\Chatting\Chatting\obj\Debug\Chatting.pdb
+E:\Source\Repos\IoT225\C#\Chatting\Chatting\bin\Debug\Chatting.exe.config
+E:\Source\Repos\IoT225\C#\Chatting\Chatting\bin\Debug\Chatting.exe
+E:\Source\Repos\IoT225\C#\Chatting\Chatting\bin\Debug\Chatting.pdb
+E:\Source\Repos\IoT225\C#\Chatting\Chatting\bin\Debug\myLibrary.dll
+E:\Source\Repos\IoT225\C#\Chatting\Chatting\bin\Debug\myLibrary.pdb
+E:\Source\Repos\IoT225\C#\Chatting\Chatting\obj\Debug\Chatting.frmChat.resources
+E:\Source\Repos\IoT225\C#\Chatting\Chatting\obj\Debug\Chatting.frmNetConfig.resources
+E:\Source\Repos\IoT225\C#\Chatting\Chatting\obj\Debug\Chatting.Properties.Resources.resources
+E:\Source\Repos\IoT225\C#\Chatting\Chatting\obj\Debug\Chatting.csproj.GenerateResource.cache
+E:\Source\Repos\IoT225\C#\Chatting\Chatting\obj\Debug\Chatting.csproj.CoreCompileInputs.cache
+E:\Source\Repos\IoT225\C#\Chatting\Chatting\obj\Debug\Chatting.csproj.CopyComplete
+E:\Source\Repos\IoT225\C#\Chatting\Chatting\obj\Debug\Chatting.exe
+E:\Source\Repos\IoT225\C#\Chatting\Chatting\obj\Debug\Chatting.pdb
